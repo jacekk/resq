@@ -7,6 +7,9 @@
     "lng"
   ],
   "properties": {
+    "type": {
+      "enum": ["end", "help"]
+    },
     "message": {
       "type": "string"
     },
