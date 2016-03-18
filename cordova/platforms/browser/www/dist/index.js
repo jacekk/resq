@@ -17,12 +17,14 @@ webpackJsonp([0],{
 	
 	var _main2 = _interopRequireDefault(_main);
 	
+	__webpack_require__(163);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	_reactDom2.default.render(_react2.default.createElement(
 	    'p',
 	    null,
-	    'Hello React'
+	    'Hello React Cordova'
 	), document.getElementById('app'));
 
 /***/ },
@@ -378,6 +380,47 @@ webpackJsonp([0],{
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+
+/***/ 163:
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	;(function () {
+	    function onDeviceReady() {
+	        console.log('[Cordova] device ready');
+	        navigator.contacts.find([navigator.contacts.fieldType.phoneNumbers], function (contacts) {
+	            contacts.forEach(function (contact) {
+	                console.log(contact.phoneNumbers);
+	            });
+	        }, function () {
+	            console.log('contacts:error', arguments);
+	        });
+	
+	        setTimeout(function () {
+	            window.plugins.ContactChooser.chooseContact(function (contactInfo) {
+	                setTimeout(function () {
+	                    // use timeout to fix iOS alert problem
+	                    alert(contactInfo.displayName + " " + contactInfo.email + " " + contactInfo.phoneNumber);
+	                }, 0);
+	            });
+	        }, 5000);
+	    }
+	
+	    function onPause() {
+	        console.log('[Cordova] pause');
+	    }
+	
+	    function onResume() {
+	        console.log('[Cordova] resume');
+	    }
+	
+	    document.addEventListener('deviceready', onDeviceReady, false);
+	    document.addEventListener('pause', onPause, false);
+	    document.addEventListener('resume', onResume, false);
+	})();
 
 /***/ }
 
