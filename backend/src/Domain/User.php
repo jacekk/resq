@@ -77,11 +77,11 @@ class User extends AbstractDomain {
         $this->telephone = $telephone;
     }
 
-    public function getArrayCopy($includePassword = false)
+    public function getArrayCopy($includePassword = true)
     {
         return array(
             'id' => $this->getId(),
-            'name' => $this->getEmail(),
+            'email' => $this->getEmail(),
             'telephone' => $this->getTelephone(),
             'password' => $includePassword ? $this->getPassword() : null,
         );
