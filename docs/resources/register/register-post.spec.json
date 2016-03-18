@@ -2,12 +2,12 @@
   "title": "/register POST",
   "type": "object",
   "required": [
-    "username",
+    "email",
     "password",
     "telephone"
   ],
   "properties": {
-    "username": {
+    "email": {
       "type": "string"
     },
     "password": {

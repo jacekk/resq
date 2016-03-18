@@ -1,15 +1,15 @@
 {
-  "title": "/login GET",
+  "title": "/contacts POST",
   "type": "object",
   "required": [
-    "email",
-    "password"
+    "name",
+    "telephone"
   ],
   "properties": {
-    "email": {
+    "name": {
       "type": "string"
     },
-    "password": {
+    "telephone": {
       "type": "string"
     }
   }
