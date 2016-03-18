@@ -27,7 +27,7 @@ export default class Register extends React.Component {
     render() {
         return (
             <div>
-                <h3>Register page</h3>
+                <h3>Register form</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="input-wrapper">
                         <label htmlFor="email">Email:</label>
