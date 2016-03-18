@@ -40,5 +40,11 @@
     "style-loader": "^0.13.0",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "chai": "^3.5.0",
+    "flux-standard-action": "^0.6.1",
+    "immutable": "^3.7.6",
+    "redux-actions": "^0.9.1"
   }
 }
