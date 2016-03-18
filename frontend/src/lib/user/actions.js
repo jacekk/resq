@@ -5,6 +5,16 @@ export function userCreate(email, password, telephone) {
         type: USER_CREATE,
         payload: {
             email, password, telephone
+        },
+        meta: {
+            validator: {
+                email: {
+                    func: (email) => {
+                        return !!email;
+                    },
+                    msg: 'Invalid email'
+                }
+            }
         }
     }
 }
