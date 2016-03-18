@@ -21,7 +21,7 @@ config = {
         vendors: ['react', 'react-dom']
     },
     resolve: {
-        extensions: ['', '.webpack.js', '.js', '.jsx']
+        extensions: ['', '.webpack.js', '.js', '.jsx', '.less']
     },
     output: {
         path: distPath,
@@ -34,6 +34,10 @@ config = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel'
+            },
+            {
+                test: /\.less?$/,
+                loader: "style!css!less"
             }
         ]
     },
