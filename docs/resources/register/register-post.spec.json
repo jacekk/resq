@@ -1,0 +1,20 @@
+{
+  "title": "/register POST",
+  "type": "object",
+  "required": [
+    "username",
+    "password",
+    "telephone"
+  ],
+  "properties": {
+    "username": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
+    "telephone": {
+      "type": "string"
+    }
+  }
+}
