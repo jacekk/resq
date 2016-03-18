@@ -1,0 +1,7 @@
+{
+  "title": "/contacts GET",
+  "type": "array",
+  "items": {
+    "type": "object"
+  }
+}
