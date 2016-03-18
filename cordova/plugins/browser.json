@@ -15,6 +15,9 @@
         },
         "cordova-plugin-contacts": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "com.monday.contact-chooser": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },
     "dependent_plugins": {}

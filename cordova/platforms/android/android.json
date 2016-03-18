@@ -19,6 +19,10 @@
                         {
                             "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"ContactChooser\"><param name=\"android-package\" value=\"com.monday.cordova.ContactChooserPlugin\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -28,7 +32,7 @@
                     "/*": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.READ_CONTACTS\" />",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\" />",
@@ -55,6 +59,9 @@
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
         "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "com.monday.contact-chooser": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },
@@ -141,11 +148,19 @@
             "file": "plugins/cordova-plugin-whitelist/whitelist.js",
             "id": "cordova-plugin-whitelist.whitelist",
             "runs": true
+        },
+        {
+            "file": "plugins/com.monday.contact-chooser/www/ContactChooser.js",
+            "id": "com.monday.contact-chooser.ContactChooser",
+            "clobbers": [
+                "ContactChooser"
+            ]
         }
     ],
     "plugin_metadata": {
         "cordova-plugin-contacts": "2.0.1",
         "cordova-plugin-sim": "1.2.1",
-        "cordova-plugin-whitelist": "1.2.1"
+        "cordova-plugin-whitelist": "1.2.1",
+        "com.monday.contact-chooser": "0.3"
     }
 }

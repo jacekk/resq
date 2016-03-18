@@ -79,6 +79,14 @@ module.exports = [
         "merges": [
             ""
         ]
+    },
+    {
+        "file": "plugins/com.monday.contact-chooser/www/ContactChooser.js",
+        "id": "com.monday.contact-chooser.ContactChooser",
+        "pluginId": "com.monday.contact-chooser",
+        "clobbers": [
+            "ContactChooser"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -86,7 +94,8 @@ module.exports.metadata =
 {
     "cordova-plugin-whitelist": "1.2.1",
     "cordova-plugin-sim": "1.2.1",
-    "cordova-plugin-contacts": "2.0.1"
+    "cordova-plugin-contacts": "2.0.1",
+    "com.monday.contact-chooser": "0.3"
 }
 // BOTTOM OF METADATA
 });
