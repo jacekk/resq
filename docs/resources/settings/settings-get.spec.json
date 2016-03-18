@@ -1,0 +1,12 @@
+{
+  "title": "/settings GET",
+  "type": "object",
+  "required": [
+    "telephone"
+  ],
+  "properties": {
+    "telephone": {
+      "type": "string"
+    }
+  }
+}
