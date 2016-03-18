@@ -1,0 +1,5 @@
+{
+    "require": {
+        "zfcampus/zf-apigility": "~1.0"
+    }
+}
