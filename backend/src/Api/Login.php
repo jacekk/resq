@@ -13,9 +13,8 @@ class Login extends ApiAbstract {
         $userRepository = new UserRepository(\Flight::db());
 
         $postData = \Flight::request()->data;
-
         try {
-            $this->requiredFields($postData, array('email', 'password', 'telephone'));
+            $this->requiredFields($postData, array('email', 'password'));
         } catch (ApiProblem $e) {
             return $this->apiProblem(self::UNPROCESSABLE_ENTITY, 'Register', $e->getMessage());
         }
@@ -23,16 +22,41 @@ class Login extends ApiAbstract {
         // Check if user is already registered
         $userCheck = $userRepository->fetch(null, 'email = \'' . addslashes($postData->email) .'\'');
 
-        if ($userCheck->rowCount() > 0) {
-            return $this->apiProblem(self::UNPROCESSABLE_ENTITY, 'Register', 'User already exists');
+        if ($userCheck->rowCount() == 0) {
+            return $this->apiProblem(self::UNPROCESSABLE_ENTITY, 'Register', 'User does not exists');
         }
 
-        $user->setEmail($postData->email);
+        // Check credentials
         $user->setPassword($postData->password);
-        $user->setTelephone($postData->telephone);
-        $user = $userRepository->persist($user);
 
-        return $user->getArrayCopy(false);
+        $authCheck = $userRepository->fetch(null,
+            "email = '{$postData->email}' AND password = '{$user->getPassword()}'");
+
+
+        // Log in user
+        $session = \Flight::get('session');
+        $segment = $session->getSegment('Auth');
+
+        if ($authCheck->rowCount() > 0) {
+
+            foreach($authCheck as $user) {
+                $segment->set('email', $postData->email);
+                $segment->set('id', $user['id']);
+
+                $session->commit();
+            }
+
+            return array(
+                'result' => 'success',
+                'session' => session_id(),
+                'email' => $postData->email
+            );
+
+        } else {
+            return $this->apiProblem(self::UNAUTHORIZED, 'Login', 'Password is incorrect!');
+        }
+
+
 
     }
 
