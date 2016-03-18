@@ -1,6 +1,6 @@
 {
-  "type": "end",
-  "message": "Went into a mine. Help me!",
+  "type": "ok",
+  "message": "I am fine now",
   "expires": "2016-03-05T06:24:57+00:00",
   "lat": 12.345,
   "lng": 54.321

@@ -1,0 +1,15 @@
+{
+  "title": "/contact GET",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "telephone": {
+      "type": "string"
+    }
+  }
+}

@@ -8,7 +8,7 @@
   ],
   "properties": {
     "type": {
-      "enum": ["end", "help"]
+      "enum": ["rescue", "ok"]
     },
     "message": {
       "type": "string"
