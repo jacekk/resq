@@ -1,0 +1,18 @@
+[
+  {
+    "id": 123,
+    "status": "started",
+    "message": "Went into a mine. Help me!",
+    "expires": "2016-03-20T06:24:57+00:00",
+    "lat": 12.345,
+    "lng": 54.321
+  },
+  {
+    "id": 122,
+    "status": "ended",
+    "message": "Went into a mine. Help me!",
+    "expires": "2016-03-05T06:24:57+00:00",
+    "lat": 22.345,
+    "lng": 11.321
+  }
+]

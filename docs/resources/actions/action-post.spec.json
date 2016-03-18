@@ -1,0 +1,24 @@
+{
+  "title": "/action POST",
+  "type": "object",
+  "required": [
+    "expires",
+    "lat",
+    "lng"
+  ],
+  "properties": {
+    "message": {
+      "type": "string"
+    },
+    "expires": {
+      "type": "string",
+      "format": "date"
+    },
+    "lat": {
+      "type": "number"
+    },
+    "lng": {
+      "type": "number"
+    }
+  }
+}

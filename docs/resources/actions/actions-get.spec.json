@@ -1,0 +1,7 @@
+{
+  "title": "/actions GET",
+  "type": "array",
+  "items": {
+    "type": "object"
+  }
+}

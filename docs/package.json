@@ -9,7 +9,8 @@
     "chai-json-schema": "^1.2.0",
     "glob": "^7.0.3",
     "nodemon": "^1.9.1",
-    "tv4": "^1.2.7"
+    "tv4": "^1.2.7",
+    "tv4-formats": "^1.0.2"
   },
   "scripts": {
     "test": "node validate.js",

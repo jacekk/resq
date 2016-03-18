@@ -2,9 +2,11 @@ const fs = require('fs');
 const util = require('util');
 const glob = require('glob');
 const tv4 = require('tv4');
+const formats = require('tv4-formats');
 const chai = require('chai');
 const expect = chai.expect;
 
+tv4.addFormat(formats);
 chai.use(require('chai-json-schema'));
 
 const docsDirMatch = 'resources/**/*';

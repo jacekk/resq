@@ -1,0 +1,29 @@
+{
+  "title": "/action GET",
+  "type": "object",
+  "required": [
+    "id",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "status": {
+      "enum": [
+        "start",
+        "stop",
+        "pending"
+      ]
+    },
+    "message": {
+      "type": "string"
+    },
+    "lat": {
+      "type": "number"
+    },
+    "lng": {
+      "type": "number"
+    }
+  }
+}
