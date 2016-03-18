@@ -16,6 +16,30 @@ in the /backend directory
 
 ## Frontend
 
+### Scripts
+
+
+Production build:
+```
+npm run build
+```
+
+Watch file changes:
+```
+npm run dev
+```
+
+Dev server (don't work?):
+```
+npm run dev-server
+```
+
+Tests:
+```
+npm run test
+npm run test:watch
+```
+
 ### Cordova installation
 
 ```

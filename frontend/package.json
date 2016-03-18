@@ -4,9 +4,10 @@
   "description": "ResQ App",
   "main": "dist/index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "NODE_ENV=production webpack",
     "build:cordova": "webpack && cp ./dist/*.js ../cordova/www/dist && cp index.html ../cordova/www/",
-    "dev": "webpack-dev-server",
+    "dev": "webpack --watch",
+    "dev-server": "webpack-dev-server",
     "test": "mocha './src/**/*.spec.jsx' --compilers js:babel-core/register",
     "test:watch": "npm test -- --watch --watch-extensions jsx,js"
   },

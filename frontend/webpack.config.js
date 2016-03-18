@@ -1,9 +1,33 @@
-module.exports = {
-    entry: './src/main.jsx',
+var path = require('path'),
+    webpack = require('webpack'),
+    environment = process.env.NODE_ENV,
+    plugins, config, distPath;
+
+distPath = path.resolve(__dirname, 'dist');
+
+plugins = [
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
+];
+
+if (environment === 'production') {
+    plugins.push(new webpack.optimize.UglifyJsPlugin({
+        minimize: true
+    }));
+}
+
+config = {
+    entry: {
+        app: path.resolve(__dirname, 'src/main.jsx'),
+        vendors: ['react', 'react-dom']
+    },
+    resolve: {
+        extensions: ['', '.webpack.js', '.js', '.jsx']
+    },
     output: {
-        path: './dist/',
+        path: distPath,
         filename: 'index.js'
     },
+    devtool: 'source-map',
     module: {
         loaders: [
             {
@@ -13,7 +37,7 @@ module.exports = {
             }
         ]
     },
-    resolve: {
-      extensions: ['', '.js', '.jsx']
-    }
-}
+    plugins: plugins
+};
+
+module.exports = config;
