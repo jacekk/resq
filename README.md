@@ -15,6 +15,7 @@ in the /backend directory
 
 
 ## Frontend
+
 ### Cordova installation
 
 ```
@@ -22,10 +23,12 @@ $ sudo npm install -g cordova
 $ cd Resq
 ```
 
-## Running
+### Running
 
-In Chrome browser:
+Execute one of the following:
 
 ```
 $ cordova run browser
+$ cordova run --target=firefox
+$ cordova run --target=opera
 ```
