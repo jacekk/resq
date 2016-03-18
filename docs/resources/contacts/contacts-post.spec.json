@@ -1,0 +1,16 @@
+{
+  "title": "/contacts POST",
+  "type": "object",
+  "required": [
+    "name",
+    "telephone"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "telephone": {
+      "type": "string"
+    }
+  }
+}

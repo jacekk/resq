@@ -2,11 +2,11 @@
   "title": "/login GET",
   "type": "object",
   "required": [
-    "username",
+    "email",
     "password"
   ],
   "properties": {
-    "username": {
+    "email": {
       "type": "string"
     },
     "password": {
