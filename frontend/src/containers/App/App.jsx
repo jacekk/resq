@@ -1,16 +1,14 @@
 import React from 'react';
 
+import Menu from '../../menu';
+
 export default class App extends React.Component {
     render() {
         return (
             <div>
-                <h3>Start page</h3>
-                <br/>
-                <a href="#/register">Register</a>
-                <br/>
-                <a href="#/login">Login</a>
-                <br/>
-                <a href="#/contacts">Contacts</a>
+                <h1>ResQ</h1>
+                <Menu />
+                {this.props.children}
             </div>
         )
     }
