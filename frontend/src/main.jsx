@@ -2,6 +2,8 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Router, Route, IndexRoute, Link, hashHistory} from 'react-router'
 
+import './phone';
+
 import App from './containers/App';
 import Contacts from './containers/Contacts';
 import Register from './containers/Register';
