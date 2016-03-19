@@ -2,7 +2,7 @@ import React from 'react';
 
 import Field from '../../components/FormField';
 import {NOTIFY_ERROR, NOTIFY_INFO} from '../../lib/constants';
-import {userCreate} from '../../lib/user/actions';
+import {userCreate, clearSession} from '../../lib/user/actions';
 import {registerRequest} from '../../lib/request/actions';
 import {notify, hideNotification} from '../../lib/notification/actions';
 
@@ -16,6 +16,10 @@ export default class Register extends React.Component {
             password: '',
             telephone: ''
         };
+    }
+
+    componentDidMount() {
+        this.props.dispatch(clearSession());
     }
 
     onSubmit(ev) {
