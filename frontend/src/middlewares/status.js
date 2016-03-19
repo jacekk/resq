@@ -7,6 +7,8 @@ const createRequest = (next, action, state) => {
     let suffix = '';
     if (action.payload.etap !== C.START) {
         suffix += '/put';
+    } else {
+        delete action.payload.type;
     }
     return superagent
         .post(C.API_URL + 'action' + suffix)
