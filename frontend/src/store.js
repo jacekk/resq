@@ -53,19 +53,19 @@ store = createStoreWithMiddleware(reducers, getInitialState(data), compose(
 let currentPathname = '#';
 const UNAUTHORIZED_PATHS = ['/register', '/'];
 
-// store.subscribe(() => {
-//     const state = store.getState();
-//     if (! state.routing.locationBeforeTransitions.pathname) {
-//         return;
-//     }
-//     const pathname = state.routing.locationBeforeTransitions.pathname;
-//     if (pathname !== currentPathname) {
-//         currentPathname = pathname;
-//         if (UNAUTHORIZED_PATHS.indexOf(pathname) === -1) {
-//             store.dispatch(contactsRequest());
-//         }
-//     }
-// });
+store.subscribe(() => {
+    const state = store.getState();
+    if (! state.routing.locationBeforeTransitions.pathname) {
+        return;
+    }
+    const pathname = state.routing.locationBeforeTransitions.pathname;
+    if (pathname !== currentPathname) {
+        currentPathname = pathname;
+        if (UNAUTHORIZED_PATHS.indexOf(pathname) === -1) {
+            store.dispatch(contactsRequest());
+        }
+    }
+});
 
 window.store = store;
 export default store;
