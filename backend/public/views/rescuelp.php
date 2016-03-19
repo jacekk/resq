@@ -6,25 +6,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Resq - Somebody need your help!</title>
-    <meta name="author" content="Joshua Mervine, Justin Dorfman">
-    <meta name="description" content="BootstrapCDN">
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-uSbimwRPo7PKyTL6azsx1CcBce/X9Qg+wX1MAjNV1gAkSXYveZbZeMMyJghdsSol" crossorigin="anonymous">
 </head>
 <body>
 
 <div class="jumbotron">
-    <div class="container text-center"><h1>BootstrapCDN</h1>
-        <p>The recommended <a href="https://www.maxcdn.com/" target="_blank">CDN</a> for <a
-                href="http://getbootstrap.com/" target="_blank">Bootstrap</a>, <a href="http://fontawesome.io/"
-                                                                                  target="_blank">Font Awesome</a> and
-            <a href="http://bootswatch.com/" target="_blank">Bootswatch</a>.</p>
-        <div class="social text-center">
-            <ul class="list-inline">
-                <li>
-                    <iframe
-                        src="https://ghbtns.com/github-btn.html?user=MaxCDN&amp;repo=bootstrap-cdn&amp;type=watch&amp;count=true"
-                        width="110" height="20" title="Star on GitHub"></iframe>
-                </li>
-                <li>
-                    <iframe
-                        src="https://platform.twitter.com/widgets/follow_button.1375828408.html#_=1376940868174&amp;id=twitter-widget-2&amp;lang=en&amp;screen_name=jdorfman&amp;show_count=false&amp;show_screen_name=true&amp;size=m"
-                        width="130" height="20" title="Twitter Tweet Button" data-twttr-rendered
+    <div class="container text-center"><h1>ResQ - Stay Safe!</h1>
+        <p>Your friend added <strong>you as his ICE</strong> (<em>In Case of Emergency</em>) Contact - now we cannot connect to him to be sure that he is allright.
+            <strong>Please try to contact him as fast as possible.</strong> Below you'll find last recorded location and message left by your friend.</p>
+        <div id="map" style="width: 100%; height: 500px"></div>
+
+        <script type="text/javascript">
+            var lastPoint = {lat: <?=$action['lat']?>, lng: <?=$action['lat']?>};
+
+            var mapOptions = {
+                zoom: 8,
+                center: new google.maps.LatLng(lastPoint),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            var contentString = '<div id="content">This is the last known location recorded at </div>';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            var marker = new google.maps.Marker({
+                position: lastPoint,
+                map: map,
+                title: 'Last known location'
+            });
+
+            infowindow.open(map, marker);
+        </script>
+    </div>
+</div>

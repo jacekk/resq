@@ -46,11 +46,7 @@ class Action extends ApiAbstract {
 
     public function put()
     {
-        $action = new ActionDomain();
-
         $postData = \Flight::request()->data;
-
-
         try {
             $this->requiredFields($postData, array('message'));
         } catch (ApiProblem $e) {
@@ -61,23 +57,34 @@ class Action extends ApiAbstract {
             return $this->rescue();
         } else if ($postData->type == 'ok') {
             return $this->safe();
+        } else {
+            return $this->apiSuccess(200, 'Location & message updated');
         }
 
-        return $this->apiSuccess(200, 'Notifications sent!');
+
     }
 
     protected function rescue()
     {
+        $action = new ActionDomain();
+        $postData = \Flight::request()->data;
+
+        $action->exchangeArray($postData);
+
         $actions = $this->getRepository()->getOpenActions($this->userId);
         $userRepository = new UserRepository(\Flight::db());
 
-        if (!$actions) {
+        if (!$actions->rowCount()) {
             return $this->apiProblem(404, 'Actions', 'No actions related to user!');
         }
 
         $markActions = array();
         foreach ($actions as $action) {
             $markActions[] = $action['id'];
+        }
+
+        if (!count($actions)) {
+            return $this->apiProblem(404, 'Actions', 'No actions related to user!');
         }
 
         // Notify friends
@@ -96,12 +103,41 @@ class Action extends ApiAbstract {
             $markActions[] = $action['id'];
             $notifier->notify($action);
         }
-        return $this->apiSuccess(200, 'Notifications sent!');
+        return $this->apiSuccess(200, 'Notifications about the danger sent!');
     }
 
     public function safe()
     {
+        $actions = $this->getRepository()->getOpenActions($this->userId);
+        $userRepository = new UserRepository(\Flight::db());
 
+        if (!$actions->rowCount()) {
+            return $this->apiProblem(404, 'Actions', 'No actions related to user!');
+        }
+
+        $markActions = array();
+        foreach ($actions as $action) {
+            $markActions[] = $action['id'];
+        }
+
+        // Notify friends
+        $notifier = new ContactNotifier();
+        $notifier->notify($action);
+
+        // Mark actions as "need rescue"
+        $this->getRepository()->setStatus($markActions, ActionDomain::STATUS_DISABLED);
+
+        // Send back message that system will take care of this
+        $rescuedUser = $userRepository->fetchEntity($action['user_id']);
+        SMS::instance()->send($rescuedUser->getTelephone(), 'RESQ - Your ICE contact list was notified about your problems! Hope they get there soon!');
+
+        $markActions = array();
+        foreach($actions as $action) {
+            $markActions[] = $action['id'];
+            $notifier->notify($action);
+        }
+
+        return $this->apiSuccess(200, 'Alarm has been disabled');
     }
 
     protected function getRepository()

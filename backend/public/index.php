@@ -18,6 +18,8 @@ Flight::register('db', 'PDO', array('mysql:host=localhost;port=3306;dbname=resq_
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 });
 
+Flight::set('flight.views.path', dirname(__FILE__) . '/views/');
+
 // Initialize the session
 $sessionFactory = new \Aura\Session\SessionFactory;
 $session = $sessionFactory->newInstance($_COOKIE);
@@ -35,6 +37,18 @@ Flight::route('OPTIONS *', function () {
         die();
 });
 
+Flight::route('POST /rest/@module/put/*', function ($module, $route) {
+    $result = ClassFactory::create($module, $route, 'put');
+    Flight::json($result);
+    die();
+}, true);
+
+Flight::route('GET /rest/@module/delete/*', function ($module, $route) {
+    $result = ClassFactory::create($module, $route, 'delete');
+    Flight::json($result);
+    die();
+}, true);
+
 Flight::route('POST /rest/@module/*', function ($module, $route) {
     $result = ClassFactory::create($module, $route, 'post');
     Flight::json($result);
@@ -45,7 +59,7 @@ Flight::route('GET /rest/@module/*', function ($module, $route) {
     Flight::json($result);
 }, true);
 
-Flight::route('PUT /rest/@module/*', function ($module, $route) {
+Flight::route('PUT /rest/@module/put*', function ($module, $route) {
     $result = ClassFactory::create($module, $route, 'put');
     Flight::json($result);
 }, true);
@@ -55,14 +69,16 @@ Flight::route('DELETE /rest/@module/*', function ($module, $route) {
     Flight::json($result);
 }, true);
 
+
+
 Flight::route('GET /gateway/@module/*', function ($module, $route) {
     $result = ClassFactory::create($module, $route, 'get', ClassFactory::TYPE_GATEWAY);
     Flight::json($result);
 }, true);
 
-Flight::route('GET /s/@hash', function($hash) {
-
-});
+Flight::route('GET /s/@module', function($hash, $route) {
+    $result = ClassFactory::create('Landing', $route, 'get', ClassFactory::TYPE_WEB);
+}, true);
 
 Flight::route('/', function(){
     echo 'Resq Backend API';
