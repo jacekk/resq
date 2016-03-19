@@ -3,24 +3,13 @@
 @lightBgColor: #CCC;
 @darkTextColor: #000;
 
-body, html {
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    color: @textColor;
-    background: @bgColor;
-    height: 100%;
-}
-
-a {
-    color: #CCC;
-    &:hover {
-        color: #FFF;
-    }
-}
+@import "./less/global.less";
+@import "./less/forms.less";
+@import "./less/topIcon.less";
+@import "./less/helpers.less";
 
 .content {
-    h1, h2, h3, h4, h5, h6 {
-        color: @textColor;
-    }
+    padding: 40px;
 }
 .label {
     color: @textColor;

@@ -47,8 +47,14 @@ export default class Register extends React.Component {
     render() {
         return (
             <section className="section">
+                <a href="#/" className="topIcon topIcon--left">
+                    <img src="./svg/back.svg"/>
+                </a>
             <div className="content">
-                <h2>Register form</h2>
+                <div className="alignCenter">
+                    <img src="./svg/register.svg"/>
+                    <h1>Register</h1>
+                </div>
                 <form onSubmit={this.onSubmit}>
                     <p className="control">
                         <Field name="email" label="Email" binding={this.handleChange} type="email"/>
@@ -59,8 +65,8 @@ export default class Register extends React.Component {
                     <p className="control">
                         <Field name="telephone" label="Telephone" binding={this.handleChange}/>
                     </p>
-                    <p className="control">
-                        <button type="submit" className="button is-success">
+                    <p className="control alignCenter">
+                        <button type="submit" className="button button--primary">
                             Register
                         </button>
                     </p>

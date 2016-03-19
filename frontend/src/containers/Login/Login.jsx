@@ -45,7 +45,10 @@ export default class Login extends React.Component {
         return (
             <section className="section">
                 <div className="content">
-                    <h2>Login form</h2>
+                    <div className="alignCenter">
+						<img src="./svg/user.svg"/>
+						<h1>Login</h1>
+                    </div>
                     <form onSubmit={this.onSubmit}>
                         <p className="control">
                             <Field name="email" label="Email" binding={this.handleChange} type="email"/>
@@ -53,14 +56,15 @@ export default class Login extends React.Component {
                         <p className="control">
                             <Field name="password" label="Password" binding={this.handleChange} type="password"/>
                         </p>
-                        <p className="control">
-                            <button type="submit" className="button is-success">
+                        <p className="control alignCenter">
+                            <button type="submit" className="button button--primary">
                                 Log in
                             </button>
+							<span className="or">or</span>
+							<a className="button" href="#/register">Register</a>
                         </p>
                     </form>
                     <br/>
-                    <a className="button" href="#/register">or Register</a>
                 </div>
             </section>
         )
