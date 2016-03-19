@@ -4,6 +4,8 @@ namespace RST\Resq\Api;
 
 abstract class ApiAbstract {
 
+    protected $route;
+
     const UNAUTHORIZED = 403;
     const UNPROCESSABLE_ENTITY = 422;
     const GENERAL_ERROR = 500;
@@ -14,9 +16,9 @@ abstract class ApiAbstract {
         500 => 'General error',
     );
 
-    public function init()
+    public function init($route)
     {
-
+        $this->route = $route;
     }
 
     protected function requiredFields($data, $fields)

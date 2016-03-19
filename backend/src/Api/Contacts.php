@@ -4,16 +4,19 @@ namespace RST\Resq\Api;
 
 class Contacts extends ApiAbstract {
 
+    protected $userId;
+
+    public function init() {
+        $this->userId = $this->requireAuth();
+    }
+
     public function get() {
 
-        $this->requireAuth();
-
-        die('Do someting authorized');
     }
 
     public function put()
     {
-        die('put method');
+        $postData = \Flight::request()->splat;
     }
 
 }
