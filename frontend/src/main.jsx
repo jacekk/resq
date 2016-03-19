@@ -9,6 +9,7 @@ import App from './containers/App';
 import Contacts from './containers/Contacts';
 import Register from './containers/Register';
 import Login from './containers/Login';
+import Timer from './containers/Timer';
 
 import store from './store';
 
