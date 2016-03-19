@@ -1,4 +1,5 @@
 import {createStore, applyMiddleware, compose, Middleware, combineReducers} from 'redux';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import {fromJS, Map} from "immutable";
 
 import user from "./lib/user/reducer";
@@ -26,6 +27,7 @@ let reducers = combineReducers({
     phoneContacts,
     iceContacts,
     request,
+    routing: routerReducer,
 });
 
 let data = {};
