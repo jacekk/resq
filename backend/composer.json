@@ -1,7 +1,8 @@
 {
     "require": {
         "mikecao/flight": "^1.2",
-        "aura/session": "2.*"
+        "aura/session": "2.*",
+        "serwersms/serwersms-php-client": "1.0.*"
     },
     "autoload": {
         "psr-4" : {
