@@ -16,7 +16,7 @@ export default function userRegisterMiddleware({ getState }) {
             // });
 
             return superagent
-              .get(`${C.API_URL}register`)
+              .post(`${C.API_URL}register`)
               .send(state.user.get('account'))
               .set('Accept', 'application/json')
               .end((err, res) => {
