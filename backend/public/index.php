@@ -60,6 +60,10 @@ Flight::route('GET /gateway/@module/*', function ($module, $route) {
     Flight::json($result);
 }, true);
 
+Flight::route('GET /s/@hash', function($hash) {
+
+});
+
 Flight::route('/', function(){
     echo 'Resq Backend API';
 });
