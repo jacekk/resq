@@ -49,7 +49,7 @@ class AbstractRepository {
             throw new \Exception('[DB] DB error ' . $e->getMessage() .' in query ' . $query);
         }
 
-        return $result;
+        return $result->fetch();
     }
 
     public function prepareColsAndVals($data)

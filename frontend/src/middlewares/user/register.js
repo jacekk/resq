@@ -10,30 +10,18 @@ export default function userRegisterMiddleware({ getState }) {
 
             const state = getState();
 
-            // next({
-            //     type: PENDING,
-            //     params
-            // });
-
             return superagent
-              .get(`${C.API_URL}register`)
+              .post(`${C.API_URL}register`)
               .send(state.user.get('account'))
               .set('Accept', 'application/json')
               .end((err, res) => {
-                    console.log('response', err, res);
-            //     if (err || !res.body || res.body.code !== 0) {
-            //       next({
-            //         type: REJECTED,
-            //         params
-            //       });
-            //     }
-            //     else {
-            //       next({
-            //         type: FULFILLED,
-            //         params,
-            //         data: res.body.data
-            //       });
-            //     }
+                    if (err || !res.body) {
+                        next({
+                            type: C.USER_REGISTER_ERROR
+                        });
+                    } else {
+                        window.location.hash = '/timer';
+                    }
               });
         };
     };

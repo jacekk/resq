@@ -7,7 +7,7 @@ abstract class AbstractDomain {
     public function exchangeArray($data)
     {
         foreach($data as $key => $item) {
-            if (isset($this->$key)) {
+            if (property_exists($this, $key)) {
                 $this->$key = $item;
             }
         }

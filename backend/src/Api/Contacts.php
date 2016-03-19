@@ -2,18 +2,39 @@
 
 namespace RST\Resq\Api;
 
+use RST\Resq\Domain\Contact;
+use RST\Resq\Infrastructure\ContactRepository;
+
 class Contacts extends ApiAbstract {
 
+    protected $userId;
+
+    public function init() {
+        $this->userId = $this->requireAuth();
+    }
+
     public function get() {
+        // get all user contacts
+        $contactsRepository = new ContactRepository(\Flight::db());
 
-        $this->requireAuth();
+        $result = array();
+        foreach($contactsRepository->getContactsByUserId($this->userId) as $user) {
+            $contactEntity = new Contact();
+            $contactEntity->exchangeArray($user);
+            $result[] = $contactEntity->getArrayCopy();
+        }
 
-        die('Do someting authorized');
+        return $result;
     }
 
     public function put()
     {
-        die('put method');
+        $postData = \Flight::request()->splat;
+    }
+
+    public function delete()
+    {
+
     }
 
 }

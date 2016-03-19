@@ -1,8 +1,12 @@
 {
     "require": {
+        "php": ">=5.3.3"    ,
         "mikecao/flight": "^1.2",
         "aura/session": "2.*",
         "serwersms/serwersms-php-client": "1.0.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.*"
     },
     "autoload": {
         "psr-4" : {
