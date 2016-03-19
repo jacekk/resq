@@ -17,10 +17,6 @@ export default class Login extends React.Component {
         };
     }
 
-    componentDidMount() {
-        this.props.dispatch(hideNotification());
-    }
-
     onSubmit(ev) {
         ev.preventDefault();
         let {email, password} = this.state;
