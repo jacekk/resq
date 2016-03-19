@@ -20,25 +20,33 @@ Flight::set('session', $session);
 // Match API rest commands to proper files
 header('Access-Control-Allow-Origin: *');
 
-Flight::route('POST /rest/@module/*', function ($module) {
-    $result = ClassFactory::create($module, 'post');
-    Flight::json($result);
+Flight::route('OPTIONS *', function () {
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Headers: X-Requested-With');
+        header('Access-Control-Allow-Headers: Authorization, X-Requested-With, Content-Type, Accept, X-Method-Override, X-HTTP-Method, X-HTTP-Method-Override');
+        header('Access-Control-Allow-Method: OPTIONS, GET, HEAD, PATCH, POST, PUT, DELETE, LINK, UNLINK');
+        die();
 });
 
-Flight::route('GET /rest/@module/*', function ($module) {
-    $result = ClassFactory::create($module, 'get');
+Flight::route('POST /rest/@module/*', function ($module, $route) {
+    $result = ClassFactory::create($module, $route, 'post');
     Flight::json($result);
-});
+}, true);
 
-Flight::route('PUT /rest/@module/*', function ($module) {
-    $result = ClassFactory::create($module, 'put');
+Flight::route('GET /rest/@module/*', function ($module, $route) {
+    $result = ClassFactory::create($module, $route, 'get');
     Flight::json($result);
-});
+}, true);
 
-Flight::route('GET /gateway/@module/*', function ($module) {
-    $result = ClassFactory::create($module, 'get', ClassFactory::TYPE_GATEWAY);
+Flight::route('PUT /rest/@module/*', function ($module, $route) {
+    $result = ClassFactory::create($module, $route, 'put');
     Flight::json($result);
-});
+}, true);
+
+Flight::route('GET /gateway/@module/*', function ($module, $route) {
+    $result = ClassFactory::create($module, $route, 'get', ClassFactory::TYPE_GATEWAY);
+    Flight::json($result);
+}, true);
 
 Flight::route('/', function(){
     echo 'Resq Backend API';
