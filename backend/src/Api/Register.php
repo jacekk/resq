@@ -7,7 +7,7 @@ use RST\Resq\Infrastructure\UserRepository;
 
 class Register extends ApiAbstract {
 
-    public function handle() {
+    public function post() {
 
         $user = new User();
         $userRepository = new UserRepository(\Flight::db());
