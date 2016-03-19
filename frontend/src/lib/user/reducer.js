@@ -9,7 +9,7 @@ export default function user(state = initialState, action) {
             return state.set('account', Map(action.payload));
         case consts.USER_REGISTER_ERROR:
             console.log('@todo', action.type, state);
-            return;
+            return state;
     }
 
     return state;

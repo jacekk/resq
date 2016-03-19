@@ -10,6 +10,8 @@ export const USER_REGISTER_ERROR = 'USER_REGISTER_ERROR';
 export const USER_REGISTER_SUCCESS = 'USER_REGISTER_SUCCESS';
 
 export const MIN_PASS_LENGTH = 6
+export const NOTIFICATION_SHOW = 'NOTIFICATION_SHOW';
+export const NOTIFICATION_HIDE = 'NOTIFICATION_HIDE';
 export const NOTIFY_ERROR = 'error';
 export const NOTIFY_SUCCESS = 'success';
 export const NOTIFY_INFO = 'info';
