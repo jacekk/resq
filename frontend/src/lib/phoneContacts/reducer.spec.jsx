@@ -4,7 +4,7 @@ let expect = chai.expect;
 import {createStore, applyMiddleware} from 'redux';
 
 import reducer from './reducer';
-import {contactCreate, contactRemove} from './actions';
+import {phoneContactCreate} from './actions';
 
 import Validator from 'redux-validator';
 
@@ -29,9 +29,10 @@ describe('Feature: contact creation', () => {
     context('Scenario: success', () => {
         describe('When a contact information is retrieview from the phone', () => {
             it('Then an contact is created', () => {
-                let action = contactCreate(id, name, telephone);
+                let action = phoneContactCreate(id, name, telephone);
                 let result = store.dispatch(action);
                 state = store.getState();
+                console.log(state);
                 let contact = state.get(action.payload.id);
                 expect(contact.get('id')).to.equal(id);
                 expect(contact.get('name')).to.equal(name);
@@ -39,22 +40,12 @@ describe('Feature: contact creation', () => {
             });
             it('Then multiple contacts can be created', () => {
                 let action, id1 = 1, id2 = 2;
-                action = contactCreate(id1, name, telephone);
+                action = phoneContactCreate(id1, name, telephone);
                 store.dispatch(action);
-                action = contactCreate(id2, name, telephone);
+                action = phoneContactCreate(id2, name, telephone);
                 store.dispatch(action);
                 state = store.getState();
                 expect(state.size).to.equal(2);
-            });
-        });
-        describe('When there is a contact', () => {
-            it('Then it can be removed', () => {
-                let action;
-                action = contactCreate(id, name, telephone);
-                store.dispatch(action);
-                action = contactRemove(id);
-                store.dispatch(action);
-                expect(store.getState().size).to.equal(0);
             });
         });
     });
