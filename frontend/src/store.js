@@ -8,7 +8,7 @@ import phoneContacts from "./lib/phoneContacts/reducer";
 import iceContacts from "./lib/iceContacts/reducer";
 import timer from "./lib/timer/reducer";
 import {userRegisterMiddleware, userLoginMiddleware} from './middlewares/user';
-import {contactsGetMiddleware} from './middlewares/contacts';
+import {contactsGetMiddleware, contactAddMiddleware, contactDeleteMiddleware} from './middlewares/contacts';
 import {contactsRequest} from './lib/request/actions';
 
 let store;
@@ -40,6 +40,8 @@ const validator = Validator();
 const createStoreWithMiddleware = applyMiddleware(
     validator,
     contactsGetMiddleware,
+    contactAddMiddleware,
+    contactDeleteMiddleware,
     userLoginMiddleware,
     userRegisterMiddleware
 )(createStore);
