@@ -8,3 +8,12 @@ export function registerRequest(email, password, telephone) {
         }
     }
 }
+
+export function loginRequest(email, password) {
+    return {
+        type: C.USER_LOGIN,
+        payload: {
+            email, password
+        }
+    }
+}
