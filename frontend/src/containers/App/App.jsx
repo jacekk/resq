@@ -11,8 +11,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>ResQ</h1>
+            <div className="maxHeight">
                 <Menu />
                 <Notification config={this.props.notification.toJS()}/>
                 {this.props.children}
