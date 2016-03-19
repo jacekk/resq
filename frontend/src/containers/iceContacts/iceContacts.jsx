@@ -36,21 +36,22 @@ export default class Contacts extends React.Component {
 
     render() {
         return (
-            <section className="section contactsList" id="iceContacts">
+            <section className="section" id="iceContacts">
                 <div className="content">
-                    <a href="#/" className="topIcon topIcon--left" onClick={this.handleCancellation.bind(this)}>
+                    <a href="#/timer" className="topIcon topIcon--left" onClick={this.handleCancellation.bind(this)}>
                         <img src="./svg/back.svg"/>
                     </a>
                     <div className="alignCenter">
                         <img src="./svg/contactsLarge.svg"/>
                         <h2>Contacts</h2>
                     </div>
-                    <ul>
+                    <ul className="contactWrapper">
                         {this.props.iceContacts.map(contact => {
                             let obj = contact.toJS();
                             return <Contact key={obj.id} id={obj.id} name={obj.name} telephone={obj.telephone} onRemove={this.removeHandler.bind(this)}/>
                         })}
                     </ul>
+                    {this.renderNotification()}
                     <p className="alignCenter">
                         <button id="bigFatAdd" className="button button--success" onClick={this.addHandler.bind(this)}>
                             Add contact
@@ -60,10 +61,9 @@ export default class Contacts extends React.Component {
             </section>
         )
     }
-    // {this.renderNotification()}
     renderNotification() {
         return this.props.iceContacts.size ? '' :
-        <div className="notification">
+        <div className="notification notification--static">
             <p>No contacts available. You can add one right now.</p>
         </div>;
     }

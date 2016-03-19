@@ -16,9 +16,6 @@
     color: @textColor;
 }
 
-.section {
-    background: @bgColor;
-}
 
 .maxHeight {
     height: 100%;
@@ -33,6 +30,14 @@
     align-content: stretch;
     height: 100%;
 }
+    .vGrid-headerButtons,
+    .vGrid-timerCircle,
+    .vGrid-footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
     .vGrid-headerButtons {
         height: 20%;
     }

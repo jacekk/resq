@@ -1,13 +1,16 @@
 .notification {
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
+    left: 75px;
+    right: 75px;
     background: #5A7D8B;
     padding: 1em;
     font-size: 14px;
     text-transform: uppercase;
     font-weight: bold;
+    z-index: 100;
+    border-radius: 0 0 .2em .2em;
+    animation: .5s slideDown ease;
 }
 
     .notification--danger {
@@ -17,8 +20,25 @@
         background: #CED900;
     }
 
+    .notification--static {
+        position: static;
+        margin: 1em;
+        border-radius: .2em;
+        padding: .5em 1em;
+        animation: none;
+    }
 
 .notification-icon {
     vertical-align: middle;
     margin-right: 1em;
+}
+
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
 }
