@@ -11,6 +11,9 @@ import RegisterContainer from './containers/Register';
 import LoginContainer from './containers/Login';
 import TimerContainer from './containers/Timer';
 
+import {statusUpdate} from './lib/status/actions';
+import {pad} from './lib/helpers';
+
 const App = connect(state => state)(AppContainer);
 const iceContacts = connect(state => state)(iceContactsContainer);
 const phoneContacts = connect(state => state)(phoneContactsContainer);
@@ -42,12 +45,22 @@ render(
     document.getElementById('app')
 );
 
-function onPause() {
+function onDeviceReady() {
+    console.log('DEVICE READY');
+    var watchId = navigator.geolocation.watchPosition(position => {
+        console.log('POSITION', position);
+        let lastState = store.getState();
+        let fullminutes = lastState.timer.get('minutes');
+        let lat = position.coords.latitude;
+        let lng = position.coords.longitude;
+        let expires = [];
+
+        expires.push(pad(Math.floor(fullminutes / 60)));
+        expires.push(pad(fullminutes % 60));
+        expires.push(pad(0));
+
+        store.dispatch(statusUpdate(expires.join(':'), lat, lng));
+    });
 }
 
-function onResume() {
-
-}
-
-document.addEventListener('pause', onPause, false);
-document.addEventListener('resume', onResume, false);
+document.addEventListener('deviceReady', onDeviceReady, false);

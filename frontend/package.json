@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "NODE_ENV=production webpack",
-    "build:cordova": "webpack && cp ./dist/*.js ../cordova/www/dist && cp index.html ../cordova/www/",
+    "build:cordova": "webpack && cp ./dist/*.js ../cordova/www/dist && mkdir ../cordova/www/dist/svg; cp ./svg/*.svg ../cordova/www/dist/svg && cp index.html ../cordova/www/",
     "dev": "webpack --watch",
     "dev:cordova:emulator": "npm run build:cordova && cd ../cordova; cordova run --emulator",
     "dev:cordova:device": "npm run build:cordova && cd ../cordova; cordova run --device",

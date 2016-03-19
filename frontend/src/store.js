@@ -7,6 +7,7 @@ import notification from "./lib/notification/reducer";
 import phoneContacts from "./lib/phoneContacts/reducer";
 import iceContacts from "./lib/iceContacts/reducer";
 import timer from "./lib/timer/reducer";
+import status from "./lib/status/reducer";
 import {userRegisterMiddleware, userLoginMiddleware} from './middlewares/user';
 import {contactsGetMiddleware} from './middlewares/contacts';
 import {contactsRequest} from './lib/request/actions';
@@ -29,6 +30,7 @@ let reducers = combineReducers({
     phoneContacts,
     iceContacts,
     timer,
+    status,
     routing: routerReducer,
 });
 
