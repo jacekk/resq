@@ -71,7 +71,12 @@ export default class Contacts extends React.Component {
         return (
             <section className="section contactsList">
                 <div className="content">
-                    <h2>Choose contact</h2>
+                    <header className="mobileHeader">
+                        <button className="button" onClick={this.handleCancellation.bind(this)}>
+                            <i className="fa fa-arrow-left"></i>
+                        </button>
+                        <h2>Choose contact</h2>
+                    </header>
                     {preloader}
                     <ul>
                         {this.state.contacts.map(contact => <Contact key={contact.id}
