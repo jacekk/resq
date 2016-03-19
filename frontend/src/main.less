@@ -6,6 +6,7 @@
 @import "./less/global.less";
 @import "./less/forms.less";
 @import "./less/topIcon.less";
+@import "./less/notification.less";
 @import "./less/helpers.less";
 
 .content {
@@ -63,119 +64,35 @@
     }
 
 
-    .contactsList {
-        background: @lightBgColor;
-        color: @darkTextColor;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        padding-top: 20px;
+.staticPreloader {
+    @size: 100px;
+    width: @size;
+    height: @size;
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    left: 50%;
+    right: 50%;
+    margin: -50px 0 0 -50px;
+    z-index: 1;
 
-         .notification {
-            margin-top: 40px;
-        }
-
-        .content {
-            h1, h2, h3, h4, h5, h6 {
-                color: @darkTextColor;
-            }
-        }
-
-        ul {
-            position: absolute;
-            padding: 0;
-            top: 55px;
-            bottom: 0px;
-            left: -28px;
-            right: -28px;
-            overflow: auto;
-            background: #D8D8D8;
-            margin-bottom: 0;
-
-            li {
-                position: relative;
-                padding: 10px 100px 10px 10px;
-                font-size: large;
-                border-bottom: 1px solid #ccc;
-                color: #666;
-
-                strong {
-                    color: @darkTextColor;
-                    display: block;
-                }
-
-                button {
-                    position: absolute;
-                    right: 20px;
-                    top: 17px;
-                }
-            }
-
-            li:last-child {
-                border-bottom: 0;
-            }
-        }
-    }
-
-
-    .staticPreloader {
-        @size: 100px;
-        width: @size;
-        height: @size;
+    span {
         position: absolute;
+        background: #666;
+        width: 10px;
+        height: 10px;
+        border-radius: 10px;
         top: 50%;
-        bottom: 50%;
         left: 50%;
-        right: 50%;
-        margin: -50px 0 0 -50px;
-        z-index: 1;
-
-        span {
-            position: absolute;
-            background: #666;
-            width: 10px;
-            height: 10px;
-            border-radius: 10px;
-            top: 50%;
-            left: 50%;
-            margin: -5px 0 0 -5px;
-        }
-
-        span:first-child {
-            left: 10%;
-        }
-
-        span:last-child {
-            right: 10%;
-            left: auto;
-        }
+        margin: -5px 0 0 -5px;
     }
 
-
-    .mobileHeader {
-        overflow: hidden;
-
-        button, h2 {
-            float: left
-        }
-
-        h2 {
-            margin: 0 !important;
-            padding: 0 20px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+    span:first-child {
+        left: 10%;
     }
 
-    #bigFatAdd {
-        position: absolute;
-        right: 20px;
-        bottom: 20px;
-        border-radius: 50px;
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        width: 60px;
-        height: 60px;
+    span:last-child {
+        right: 10%;
+        left: auto;
     }
+}

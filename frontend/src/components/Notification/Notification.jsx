@@ -8,24 +8,26 @@ export default (props) => {
         return <div/>;
     }
 
-    let isType;
+    let type = '';
+    let icon = '';
 
     switch (config.type) {
         case NOTIFY_ERROR:
-            isType = 'is-danger';
+            type = 'notification--danger';
+            icon = <img className="notification-icon" src="./svg/alert.svg"/>;
             break;
         case NOTIFY_SUCCESS:
-            isType = 'is-success';
+            type = 'notification--success';
             break;
         case NOTIFY_INFO:
-            isType = 'is-info';
+            type = 'notification--info';
             break;
     }
 
-    let className = 'notification ' + isType;
+    let className = 'notification ' + type;
     return (
         <div className={className}>
-            {config.msg}
+            {icon} {config.msg}
         </div>
     );
 }

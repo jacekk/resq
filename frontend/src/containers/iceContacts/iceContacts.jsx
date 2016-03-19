@@ -38,26 +38,29 @@ export default class Contacts extends React.Component {
         return (
             <section className="section contactsList" id="iceContacts">
                 <div className="content">
-                    <header className="mobileHeader">
-                        <button className="button" onClick={this.handleCancellation.bind(this)}>
-                            <i className="fa fa-arrow-left"></i>
-                        </button>
+                    <a href="#/" className="topIcon topIcon--left" onClick={this.handleCancellation.bind(this)}>
+                        <img src="./svg/back.svg"/>
+                    </a>
+                    <div className="alignCenter">
+                        <img src="./svg/contactsLarge.svg"/>
                         <h2>Contacts</h2>
-                    </header>
+                    </div>
                     <ul>
                         {this.props.iceContacts.map(contact => {
                             let obj = contact.toJS();
                             return <Contact key={obj.id} id={obj.id} name={obj.name} telephone={obj.telephone} onRemove={this.removeHandler.bind(this)}/>
                         })}
                     </ul>
-                    {this.renderNotification()}
-                    <button id="bigFatAdd" className="button is-success" onClick={this.addHandler.bind(this)}>
-                        <i className="fa fa-plus"></i>
-                    </button>
+                    <p className="alignCenter">
+                        <button id="bigFatAdd" className="button button--success" onClick={this.addHandler.bind(this)}>
+                            Add contact
+                        </button>
+                    </p>
                 </div>
             </section>
         )
     }
+    // {this.renderNotification()}
     renderNotification() {
         return this.props.iceContacts.size ? '' :
         <div className="notification">
