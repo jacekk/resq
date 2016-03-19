@@ -6,7 +6,8 @@ var path = require('path'),
 distPath = path.resolve(__dirname, 'dist');
 
 plugins = [
-    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+    new webpack.HotModuleReplacementPlugin()
 ];
 
 if (environment === 'production') {
@@ -25,7 +26,8 @@ config = {
     },
     output: {
         path: distPath,
-        filename: 'index.js'
+        publicPath: 'dist',
+        filename: '[name].js'
     },
     devtool: 'source-map',
     module: {

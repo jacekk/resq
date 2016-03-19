@@ -47,6 +47,7 @@
     "chai": "^3.5.0",
     "flux-standard-action": "^0.6.1",
     "immutable": "^3.7.6",
+    "react-redux": "^4.4.1",
     "redux": "^3.3.1",
     "redux-actions": "^0.9.1",
     "redux-promise": "^0.5.3",
