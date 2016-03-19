@@ -27,16 +27,24 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <div>
-                <h3>Login form</h3>
-                <form onSubmit={this.onSubmit}>
-                    <Field name="email" label="Email" binding={this.handleChange} type="email"/>
-                    <Field name="password" label="Password" binding={this.handleChange} type="password"/>
-                    <button type="submit" className="btn btn-success">
-                        Log in
-                    </button>
-                </form>
-            </div>
+            <section className="section">
+                <div className="content">
+                    <h2>Login form</h2>
+                    <form onSubmit={this.onSubmit}>
+                        <p className="control">
+                            <Field name="email" label="Email" binding={this.handleChange} type="email"/>
+                        </p>
+                        <p className="control">
+                            <Field name="password" label="Password" binding={this.handleChange} type="password"/>
+                        </p>
+                        <p className="control">
+                            <button type="submit" className="button is-success">
+                                Log in
+                            </button>
+                        </p>
+                    </form>
+                </div>
+            </section>
         )
     }
 }

@@ -59,18 +59,28 @@ export default class Register extends React.Component {
     render() {
         let {text, type} = this.state.notification;
         return (
-            <div>
-                <h3>Register form</h3>
+            <section className="section">
+            <div className="content">
+                <h2>Register form</h2>
                 <Notification text={text} type={type}/>
                 <form onSubmit={this.onSubmit}>
-                    <Field name="email" label="Email" binding={this.handleChange} type="email"/>
-                    <Field name="password" label="Password" binding={this.handleChange} type="password"/>
-                    <Field name="telephone" label="Telephone" binding={this.handleChange}/>
-                    <button type="submit" className="btn btn-success">
-                        Register
-                    </button>
+                    <p className="control">
+                        <Field name="email" label="Email" binding={this.handleChange} type="email"/>
+                    </p>
+                    <p className="control">
+                        <Field name="password" label="Password" binding={this.handleChange} type="password"/>
+                    </p>
+                    <p className="control">
+                        <Field name="telephone" label="Telephone" binding={this.handleChange}/>
+                    </p>
+                    <p className="control">
+                        <button type="submit" className="button is-success">
+                            Register
+                        </button>
+                    </p>
                 </form>
             </div>
+            </section>
         )
     }
 }

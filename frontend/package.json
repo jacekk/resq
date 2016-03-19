@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "babel-plugin-syntax-decorators": "^6.5.0",
+    "bulma": "0.0.16",
     "chai": "^3.5.0",
     "email-validator": "^1.0.4",
     "flux-standard-action": "^0.6.1",

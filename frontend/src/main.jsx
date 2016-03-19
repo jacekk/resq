@@ -20,8 +20,8 @@ const Timer = connect(state => state)(TimerContainer);
 
 import store from './store';
 
+import "!style!css!../node_modules/bulma/css/bulma.css";
 import "!style!css!less!./main.less";
-
 
 const ContactsAdd = () => {
     return (

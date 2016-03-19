@@ -1,8 +1,25 @@
-body {
+@bgColor: #272c34;
+@textColor: #fff;
+
+html {
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    color: #FFF;
-    background: #272c34;
+    color: @textColor;
+    background: @bgColor;
 }
+
 a {
     color: #CCC;
+}
+
+.content {
+    h1, h2, h3, h4, h5, h6 {
+        color: @textColor;
+    }
+}
+.label {
+    color: @textColor;
+}
+
+.section {
+    background: @bgColor;
 }
