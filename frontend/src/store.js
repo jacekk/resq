@@ -49,6 +49,7 @@ store = createStoreWithMiddleware(reducers, getInitialState(data), compose(
 ));
 
 let currentPathname = '#';
+const UNAUTHORIZED_PATHS = ['/register', '/'];
 
 store.subscribe(() => {
     const state = store.getState();
@@ -58,7 +59,9 @@ store.subscribe(() => {
     const pathname = state.routing.locationBeforeTransitions.pathname;
     if (pathname !== currentPathname) {
         currentPathname = pathname;
-        store.dispatch(contactsRequest());
+        if (UNAUTHORIZED_PATHS.indexOf(pathname) === -1) {
+            store.dispatch(contactsRequest());
+        }
     }
 });
 
