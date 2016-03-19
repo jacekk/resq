@@ -14,6 +14,11 @@ abstract class ApiAbstract {
         500 => 'General error',
     );
 
+    public function init()
+    {
+
+    }
+
     protected function requiredFields($data, $fields)
     {
         foreach($fields as $name) {
@@ -40,7 +45,7 @@ abstract class ApiAbstract {
         $segment = $session->getSegment('Auth');
 
         if ($segment->get('email')) {
-            return true;
+            return $segment->get('id');
         } else {
             throw new ApiProblem('Unauthorized session');
         }

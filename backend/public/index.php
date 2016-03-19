@@ -1,7 +1,10 @@
 <?php
+
+use RST\Resq\Util\ClassFactory;
+
 error_reporting(E_ALL);
 ini_set('display_errors', true);
-session_start();
+
 require '../vendor/autoload.php';
 
 Flight::register('db', 'PDO', array('mysql:host=localhost;port=3306;dbname=resq_app', 'resq_app', 'softmasters'), function($db) {
@@ -15,21 +18,27 @@ $session = $sessionFactory->newInstance($_COOKIE);
 Flight::set('session', $session);
 
 // Match API rest commands to proper files
+header('Access-Control-Allow-Origin: *');
 
-Flight::route('/rest/@module/*', function ($module) {
-    $className = '\\RST\\Resq\\Api\\' . ucfirst($module);
-
-    if (class_exists($className)) {
-        $class = new $className;
-        try {
-            $result = $class->handle();
-        } catch (\Exception $e) {
-            $result = $class->apiProblem(500, 'Router', 'Error: ' . $e->getMessage());
-        }
-
-        Flight::json($result);
-    }
+Flight::route('POST /rest/@module/*', function ($module) {
+    $result = ClassFactory::create($module, 'post');
+    Flight::json($result);
 });
+
+Flight::route('GET /rest/@module/*', function ($module) {
+    $result = ClassFactory::create($module, 'get');
+    Flight::json($result);
+});
+
+Flight::route('PUT /rest/@module/*', function ($module) {
+    $result = ClassFactory::create($module, 'put');
+    Flight::json($result);
+});
+
+Flight::route('GET /gateway/@module/*', function ($module) {
+    $result = ClassFactory::create($module, 'get', ClassFactory::TYPE_GATEWAY);
+    Flight::json($result);
+})
 
 Flight::route('/', function(){
     echo 'Resq Backend API';
