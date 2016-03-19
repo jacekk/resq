@@ -1,5 +1,12 @@
 <?php
 
+// Dirty CORS hack... veeery dirty, but Cordova is very restrict about CORS and even * not helps
+$headers = getallheaders();
+if (isset($headers['Authorization'])) {
+    session_id($headers['Authorization']);
+    session_start();
+}
+
 use RST\Resq\Util\ClassFactory;
 
 error_reporting(E_ALL);

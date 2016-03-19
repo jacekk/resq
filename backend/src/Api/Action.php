@@ -5,6 +5,7 @@ namespace RST\Resq\Api;
 use RST\Resq\Domain\Action as ActionDomain;
 use RST\Resq\Infrastructure\ActionRepository;
 use RST\Resq\Infrastructure\UserRepository;
+use RST\Resq\Util\ContactNotifier;
 use RST\Resq\Util\SMS;
 
 class Action extends ApiAbstract {
@@ -48,7 +49,7 @@ class Action extends ApiAbstract {
         $action = new ActionDomain();
 
         $postData = \Flight::request()->data;
-        $userRepository = new UserRepository(\Flight::db());
+
 
         try {
             $this->requiredFields($postData, array('message'));
@@ -56,7 +57,23 @@ class Action extends ApiAbstract {
             return $this->apiProblem(self::UNPROCESSABLE_ENTITY, 'ActionPost', $e->getMessage());
         }
 
+        if ($postData->type == 'rescue') {
+            return $this->rescue();
+        } else if ($postData->type == 'ok') {
+            return $this->safe();
+        }
+
+        return $this->apiSuccess(200, 'Notifications sent!');
+    }
+
+    protected function rescue()
+    {
         $actions = $this->getRepository()->getOpenActions($this->userId);
+        $userRepository = new UserRepository(\Flight::db());
+
+        if (!$actions) {
+            return $this->apiProblem(404, 'Actions', 'No actions related to user!');
+        }
 
         $markActions = array();
         foreach ($actions as $action) {
@@ -79,8 +96,11 @@ class Action extends ApiAbstract {
             $markActions[] = $action['id'];
             $notifier->notify($action);
         }
-
         return $this->apiSuccess(200, 'Notifications sent!');
+    }
+
+    public function safe()
+    {
 
     }
 
