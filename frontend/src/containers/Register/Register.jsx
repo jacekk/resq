@@ -1,5 +1,6 @@
 import React from 'react';
 import {userCreate} from '../../lib/user/actions';
+import {registerRequest} from '../../lib/request/actions';
 import {NOTIFY_ERROR, NOTIFY_INFO, NOTIFY_SUCCESS} from '../../lib/constants';
 
 import Field from '../../components/FormField';
@@ -26,17 +27,19 @@ export default class Register extends React.Component {
         let {email, password, telephone} = this.state;
         let action = userCreate(email, password, telephone);
         let result = this.props.dispatch(action);
+        console.log('dispatch result', result);
         if (result.err) {
             this.notify(result, NOTIFY_ERROR);
         } else {
+            this.props.dispatch(registerRequest(email, password, telephone));
             this.setState({
                 email: '',
                 password: '',
                 telephone: ''
             });
-            this.notify({
-                msg: "Account created"
-            }, NOTIFY_SUCCESS);
+            // this.notify({
+            //     msg: "Account created"
+            // }, NOTIFY_SUCCESS);
         }
     }
 
