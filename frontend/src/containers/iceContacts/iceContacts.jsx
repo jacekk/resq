@@ -1,6 +1,9 @@
 import React from 'react';
 import Contact from '../../components/Contact';
-import {iceContactRemove} from '../../lib/iceContacts/actions';
+import {iceContactRemove, iceContactCreate} from '../../lib/iceContacts/actions';
+import {notify} from '../../lib/notification/actions';
+import {NOTIFY_ERROR} from '../../lib/constants';
+import uuid from 'node-uuid';
 
 
 export default class Contacts extends React.Component {
@@ -8,14 +11,29 @@ export default class Contacts extends React.Component {
         let action = iceContactRemove(id);
         let result = this.props.dispatch(action);
     }
+
     handleCancellation(e) {
         e.preventDefault();
         history.back();
     }
+
+    onContactsSuccess(contact) {
+        let id = uuid.v4();
+        let name = contact.displayName;
+        let telephone = contact.phoneNumbers && contact.phoneNumbers[0] && contact.phoneNumbers[0].value;
+        let action = iceContactCreate(id, name, telephone);
+        this.props.dispatch(action);
+    }
+
+    onContactsError() {
+        this.dispatch(notify(NOTIFY_ERROR, 'Unknown error'));
+    }
+
     addHandler(e) {
         e.preventDefault();
-        location.hash = '#/contactpicker'
+        navigator.contacts.pickContact(this.onContactsSuccess.bind(this), this.onContactsError.bind(this));
     }
+
     render() {
         return (
             <section className="section contactsList" id="iceContacts">

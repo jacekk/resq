@@ -4,8 +4,6 @@ import {Provider, connect} from 'react-redux';
 import {Router, Route, IndexRoute, Link, hashHistory, RouterContext, browserHistory} from 'react-router';
 import {syncHistoryWithStore} from 'react-router-redux'
 
-import './phone';
-
 import AppContainer from './containers/App';
 import iceContactsContainer from './containers/iceContacts';
 import phoneContactsContainer from './containers/phoneContacts';
@@ -44,3 +42,14 @@ render(
     </Provider>,
     document.getElementById('app')
 );
+
+function onPause() {
+
+}
+
+function onResume() {
+    
+}
+
+document.addEventListener('pause', onPause, false);
+document.addEventListener('resume', onResume, false);
