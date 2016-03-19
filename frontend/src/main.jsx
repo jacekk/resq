@@ -30,6 +30,7 @@ render(
           <Route path="/" component={App}>
             <IndexRoute component={Login}/>
             <Route path="register" component={Register}/>
+            <Route path="timer" component={Timer}/>
             <Route path="contacts" component={Contacts}>
               <Route path="add" component={ContactsAdd}/>
             </Route>

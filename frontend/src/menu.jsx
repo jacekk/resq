@@ -6,6 +6,7 @@ export default () => {
     return (
         <ul>
             <li><Link to="/">home</Link></li>
+            <li><Link to="/timer">timer</Link></li>
             <li><Link to="/register">register</Link></li>
             <li><Link to="/contacts">contacts</Link></li>
         </ul>
