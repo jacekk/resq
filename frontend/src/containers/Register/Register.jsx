@@ -1,11 +1,9 @@
 import React from 'react';
 import {userCreate} from '../../lib/user/actions';
-
-const NOTIFY_ERROR = 'error';
-const NOTIFY_SUCCESS = 'success';
-const NOTIFY_INFO = 'info';
+import {NOTIFY_ERROR, NOTIFY_INFO, NOTIFY_SUCCESS} from '../../lib/constants';
 
 import Field from '../../components/FormField';
+import Notification from '../../components/Notification';
 
 export default class Register extends React.Component {
     constructor() {
@@ -59,10 +57,11 @@ export default class Register extends React.Component {
     }
 
     render() {
+        let {text, type} = this.state.notification;
         return (
             <div>
                 <h3>Register form</h3>
-                {this.renderNotification()}
+                <Notification text={text} type={type}/>
                 <form onSubmit={this.onSubmit}>
                     <Field name="email" label="Email" binding={this.handleChange} type="email"/>
                     <Field name="password" label="Password" binding={this.handleChange} type="password"/>
@@ -71,17 +70,6 @@ export default class Register extends React.Component {
                         Register
                     </button>
                 </form>
-            </div>
-        )
-    }
-
-    renderNotification() {
-        if (!this.state.notification.text) {
-            return null;
-        }
-        return (
-            <div className={this.state.notification.type}>
-                {this.state.notification.text}
             </div>
         )
     }
