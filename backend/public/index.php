@@ -10,6 +10,11 @@ if (isset($headers['Authorization'])) {
 use RST\Resq\Util\ClassFactory;
 
 error_reporting(E_ALL);
+session_set_cookie_params(60*60*24);
+ini_set('session.gc_maxlifetime', 60*60*24);
+ini_set('session.gc_maxlifetime',30*60);
+ini_set('session.gc_probability',1);
+ini_set('session.gc_divisor',1);
 ini_set('display_errors', true);
 
 require '../vendor/autoload.php';
