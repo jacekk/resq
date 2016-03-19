@@ -17,7 +17,7 @@ const createRequest = (next, state, resourceName) => {
                 next(notify(C.NOTIFY_ERROR, 'Wrong login or password.'));
                 return;
             }
-            next(notify(C.NOTIFY_ERROR, 'Lores.bodyading error. Try once again.'));
+            next(notify(C.NOTIFY_ERROR, 'Loading error. Try once again.'));
         });
 }
 
