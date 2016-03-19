@@ -22,7 +22,7 @@ function getInitialState(source) {
 let reducers = combineReducers({
     user,
     phoneContacts,
-    iceContacts
+    iceContacts,
     request,
 });
 
