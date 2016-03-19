@@ -1,5 +1,7 @@
 @bgColor: #272c34;
+@lightBgColor: #e7e7e7;
 @textColor: #fff;
+@darkTextColor: #000;
 
 html {
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -16,10 +18,65 @@ a {
         color: @textColor;
     }
 }
+
 .label {
     color: @textColor;
 }
 
 .section {
     background: @bgColor;
+}
+
+.contactsList {
+    background: @lightBgColor;
+    color: @darkTextColor;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 20px;
+
+    .content {
+        h1, h2, h3, h4, h5, h6 {
+            color: @darkTextColor;
+        }
+    }
+
+    ul {
+        position: absolute;
+        padding: 0;
+        top: 55px;
+        bottom: 60px;
+        left: -28px;
+        right: -28px;
+        overflow: auto;
+        background: #D8D8D8;
+
+        li {
+            padding: 10px;
+            font-size: large;
+            border-bottom: 1px solid #ccc;
+            color: #666;
+            strong {
+                color: @darkTextColor;
+                display: block;
+            }
+        }
+
+        li:last-child {
+            border-bottom: 0;
+        }
+    }
+
+    footer {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+
+        button {
+            float: right;
+        }
+    }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import Contact from '../../components/Contact';
 import {iceContactRemove} from '../../lib/iceContacts/actions';
 
+
 export default class Contacts extends React.Component {
     removeHandler(id) {
         let action = iceContactRemove(id);
@@ -9,7 +10,7 @@ export default class Contacts extends React.Component {
     }
     render() {
         return (
-            <section className="section">
+            <section className="section contactsList">
                 <div className="content">
                     <h2>Contacts</h2>
                     <ul>
