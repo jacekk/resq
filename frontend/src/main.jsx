@@ -20,8 +20,7 @@ const Timer = connect(state => state)(TimerContainer);
 
 import store from './store';
 
-require("font-awesome-webpack");
-import "!style!css!../node_modules/bulma/css/bulma.css";
+import "!style!css!../node_modules/normalize-css/normalize.css";
 import "!style!css!less!./main.less";
 
 const history = syncHistoryWithStore(hashHistory, store);

@@ -1,4 +1,4 @@
-import {USER_CREATE, USER_GET, MIN_PASS_LENGTH} from '../constants';
+import {USER_CREATE, USER_GET, USER_GET_SUCCESS, MIN_PASS_LENGTH} from '../constants';
 import emailValidator from 'email-validator';
 
 export function userCreate(email, password, telephone) {
@@ -26,6 +26,15 @@ export function userCreate(email, password, telephone) {
                     msg: 'Invalid telephone'
                 }
             }
+        }
+    }
+}
+
+export function userGetSuccess(sessionId) {
+    return {
+        type: USER_GET_SUCCESS,
+        payload: {
+            sessionId
         }
     }
 }

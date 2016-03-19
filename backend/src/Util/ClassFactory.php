@@ -6,6 +6,7 @@ class ClassFactory {
 
     const TYPE_API = 'Api';
     const TYPE_GATEWAY = 'Gateway';
+    const TYPE_WEB = 'Web';
 
     public static function create($name, $route, $method, $classType = self::TYPE_API)
     {

@@ -9,6 +9,7 @@ import iceContacts from "./lib/iceContacts/reducer";
 import timer from "./lib/timer/reducer";
 import {userRegisterMiddleware, userLoginMiddleware} from './middlewares/user';
 import {contactsGetMiddleware} from './middlewares/contacts';
+import {contactsRequest} from './lib/request/actions';
 
 let store;
 
@@ -46,5 +47,20 @@ const createStoreWithMiddleware = applyMiddleware(
 store = createStoreWithMiddleware(reducers, getInitialState(data), compose(
     window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
+
+let currentPathname = '#';
+
+store.subscribe(() => {
+    const state = store.getState();
+    if (! state.routing.locationBeforeTransitions.pathname) {
+        return;
+    }
+    const pathname = state.routing.locationBeforeTransitions.pathname;
+    if (pathname !== currentPathname) {
+        currentPathname = pathname;
+        store.dispatch(contactsRequest());
+    }
+});
+
 window.store = store;
 export default store;

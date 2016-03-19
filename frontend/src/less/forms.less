@@ -1,0 +1,72 @@
+@inputsPadding: 1.2em;
+
+.button {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, .4);
+    padding: @inputsPadding @inputsPadding*1.7;
+    border-radius: .2em;
+    color: rgba(255, 255, 255, .8);
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all .1s ease;
+
+    &:hover {
+        border-color: rgba(255, 255, 255, .5);
+    }
+
+    &:focus,
+    &:active {
+        border-color: rgba(255, 255, 255, .8);
+        box-shadow: 0 0 2px rgba(255, 255, 255, .3),
+              inset 0 0 4px rgba(255, 255, 255, .3);
+        outline: none;
+    }
+}
+
+    .button--primary {
+        border-color: rgba(255, 145, 0, .75);
+
+        &:hover {
+            border-color: rgba(255, 145, 0, .95);
+        }
+
+        &:focus,
+        &:active {
+            border-color: rgba(255, 145, 0, 1);
+            box-shadow: 0 0 2px rgba(255, 145, 0, .5),
+                  inset 0 0 4px rgba(255, 145, 0, .5);
+        }
+    }
+
+
+.input {
+    background: rgba(0, 0, 0, .2);
+    color: #FFF;
+    border: 2px solid rgba(255, 255, 255, .3);
+    border-radius: .2em;
+    padding: @inputsPadding @inputsPadding;
+    width: 100%;
+
+    &:focus {
+        border-color: rgba(116, 217, 255, .4);
+    }
+}
+
+
+.field {
+    display: block;
+    margin-bottom: @inputsPadding;
+    max-width: 500px;
+    margin: 0 auto;
+}
+    .field-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        display: block;
+        font-weight: bold;
+        padding-bottom: 5px;
+    }

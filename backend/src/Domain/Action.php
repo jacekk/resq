@@ -7,6 +7,7 @@ class Action extends AbstractDomain {
     const STATUS_ACTIVE = 1;
     const STATUS_DISABLED = 2;
     const STATUS_WARNED = 3;
+    const STATUS_RESCUE = 4;
 
     protected $id;
     protected $user_id;

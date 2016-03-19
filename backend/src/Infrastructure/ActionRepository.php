@@ -20,4 +20,11 @@ class ActionRepository extends AbstractRepository {
           WHERE u.telephone = \'' . addslashes($phone) .'\'
           AND a.status = ' . Action::STATUS_ACTIVE);
     }
+
+    public function getOpenActions($userId)
+    {
+        return $this->getDb()->query('SELECT a.*, u.telephone FROM actions a LEFT JOIN users u ON u.id = a.user_id
+          WHERE u.id = \'' . (int) $userId .'\'
+          AND a.status != ' . Action::STATUS_DISABLED);
+    }
 }
