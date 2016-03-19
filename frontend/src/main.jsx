@@ -20,6 +20,7 @@ const Timer = connect(state => state)(TimerContainer);
 
 import store from './store';
 
+require("font-awesome-webpack");
 import "!style!css!../node_modules/bulma/css/bulma.css";
 import "!style!css!less!./main.less";
 
@@ -39,15 +40,14 @@ render(
           </Route>
         </Router>
     </Provider>,
-    document.body
+    document.getElementById('app')
 );
 
 function onPause() {
-
 }
 
 function onResume() {
-    
+
 }
 
 document.addEventListener('pause', onPause, false);

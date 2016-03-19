@@ -2,63 +2,115 @@ import React from 'react';
 import Circle from '../../components/Circle';
 import TimePicker from '../../components/TimePicker';
 import {pad} from '../../lib/helpers';
-import moment from 'moment';
 
+const REFRESH_RATE = 1000;
+const MILISECONDS = 1000;
+const ADDITIONAL_HOUR = 60;
+const ADDITIONAL_MINUTES = 10;
+
+import * as actions from '../../lib/timer/actions';
 export default class Timer extends React.Component {
-	constructor() {
+	constructor(state, props) {
 		super();
 		this.initialState = {
-			started: false,
-			percent: 100,
 			mainText: 'Start',
 			helpText: 'Click to start',
-			hours: 1,
-			minutes: 30
 		};
+
 		this.state = this.initialState;
 
 		this.toogle = this.toogle.bind(this);
 		this.timePickerChanged = this.timePickerChanged.bind(this);
 	}
 
+    componentDidMount() {
+        this.props.dispatch(actions.timerInit());
+    }
+
+    componentWillUnmount() {
+    }
+
+    clearClock() {
+        clearInterval(this.tid);
+    }
+
+    updateClock() {
+        let minutes = this.props.timer.get('minutes');
+
+        minutes -= REFRESH_RATE / MILISECONDS;
+
+        if (minutes <= 0) {
+            this.clearClock();
+            this.props.dispatch(actions.timerEnded());
+        } else {
+            this.props.dispatch(actions.timerUpdate(minutes));
+        }
+    }
+
 	toogle() {
-		if (!this.state.started) {
-			let {hours, minutes} = this.state;
-			this.setState({
-				started: true,
-				percent: 1,
-				mainText: `${hours}:${pad(minutes)}`,
-				helpText: 'Click to end'
-			});
+        let self = this;
+		if (!this.props.timer.get('started')) {
+            this.tid = setInterval(() => {
+                if (this.props.timer.get('started')) {
+                    self.updateClock(REFRESH_RATE);
+                }
+            }, REFRESH_RATE)
+            this.props.dispatch(actions.timerStart());
+
 		} else {
-			this.setState(this.initialState);
+            this.clearClock();
+            this.props.dispatch(actions.timerStop());
 		}
 	}
 
 	timePickerChanged(hours, minutes) {
-		this.setState({hours, minutes});
+        this.props.dispatch(actions.timerUpdate(hours * 60 + minutes));
 	}
 
+    addHours(e) {
+        e.preventDefault();
+        let minutes = +this.props.timer.get('minutes');
+        this.props.dispatch(actions.timerAdditionalUpdate(minutes + ADDITIONAL_HOUR ));
+    }
+
+    addMinutes(e) {
+        e.preventDefault();
+        let minutes = +this.props.timer.get('minutes');
+        this.props.dispatch(actions.timerAdditionalUpdate(minutes + ADDITIONAL_MINUTES ));
+    }
+
 	render() {
-		let bottom
-		if (this.state.started) {
+		let bottom;
+        let fullminutes = this.props.timer.get('minutes');
+        let minutes = fullminutes % 60;
+        let hours = Math.floor(fullminutes / 60);
+        let percent = this.props.timer.get('percent');
+        let started = this.props.timer.get('started');
+        let mainText;
+        let helpText;
+		if (started) {
 			bottom = (
 				<div className="hGrid">
 					<div className="hGrid-left">
-						<button>+1h</button>
+						<button className="button" onClick={this.addHours.bind(this)}>+1h</button>
 					</div>
 					<div className="hGrid-right">
-						<button>+10m</button>
+						<button className="button" onClick={this.addMinutes.bind(this)}>+10m</button>
 					</div>
 				</div>
 			);
+            mainText = `${hours}:${pad(minutes)}`;
+            helpText = 'Click to end';
 		} else {
 			bottom = <TimePicker
-					hours={this.state.hours}
-					minutes={this.state.minutes}
-					onChange={this.timePickerChanged}
-				/>;
-		}
+				hours={hours}
+				minutes={minutes}
+				onChange={this.timePickerChanged}
+			/>;
+
+            mainText = 'Start';
+            helpText = 'Click to start';
+       }
 		return (
 			<div className="vGrid">
 				<div className="vGrid-headerButtons">
@@ -74,9 +126,9 @@ export default class Timer extends React.Component {
 				<div className="vGrid-timerCircle">
 					<Circle
 						onClick={this.toogle}
-						percent={this.state.percent}
-						main={this.state.mainText}
-						help={this.state.helpText}
+						percent={percent}
+						main={mainText}
+						help={helpText}
 					/>
 				</div>
 				<div className="vGrid-footer">
