@@ -2,18 +2,12 @@
 
 namespace RST\Resq\Api;
 
-use RST\Resq\Domain\User;
-use RST\Resq\Infrastructure\UserRepository;
-
-class Login extends ApiAbstract {
+class Logout extends ApiAbstract {
 
     public function get() {
-
-
         // Logout user
         $session = \Flight::get('session');
         $segment = $session->getSegment('Auth');
-
 
         $segment->set('email', false);
         $segment->set('id', false);

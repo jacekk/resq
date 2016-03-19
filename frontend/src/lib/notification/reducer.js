@@ -13,6 +13,8 @@ export default function notification(state = initialState, action) {
               ;
         case C.NOTIFICATION_HIDE:
             return state.set('show', false);
+        case C.LOCATION_CHANGE:
+            return state.set('show', false);
     }
 
     return state;
