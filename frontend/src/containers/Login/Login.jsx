@@ -1,6 +1,10 @@
 import React from 'react';
 
 import Field from '../../components/FormField';
+import {NOTIFY_ERROR, NOTIFY_INFO} from '../../lib/constants';
+import {userGet} from '../../lib/user/actions';
+import {loginRequest} from '../../lib/request/actions';
+import {notify, hideNotification} from '../../lib/notification/actions';
 
 export default class Login extends React.Component {
 	constructor() {
@@ -15,11 +19,23 @@ export default class Login extends React.Component {
 
     onSubmit(ev) {
         ev.preventDefault();
-        console.log('submitted:', this.state);
+        let {email, password} = this.state;
+        let result = this.props.dispatch(userGet(email, password));
+        if (result.err) {
+            this.props.dispatch(notify(NOTIFY_ERROR, result.msg));
+        } else {
+            this.props.dispatch(notify(NOTIFY_INFO, 'Pending...'));
+            this.props.dispatch(loginRequest(email, password));
+            this.setState({
+                email: '',
+                password: ''
+            });
+        }
     }
 
     handleChange(ev) {
         ev.preventDefault();
+        this.props.dispatch(hideNotification());
         this.setState({
             [ev.target.name]: ev.target.value,
         });

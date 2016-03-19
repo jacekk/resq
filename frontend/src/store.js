@@ -6,7 +6,7 @@ import notification from "./lib/notification/reducer";
 import phoneContacts from "./lib/phoneContacts/reducer";
 import iceContacts from "./lib/iceContacts/reducer";
 import request from "./lib/request/reducer";
-import userRegisterMiddleware from './middlewares/user/register';
+import {userRegisterMiddleware, userLoginMiddleware} from './middlewares/user';
 
 let store;
 
@@ -34,8 +34,9 @@ import Validator from 'redux-validator';
 
 const validator = Validator();
 const createStoreWithMiddleware = applyMiddleware(
-  validator,
-  userRegisterMiddleware
+    validator,
+    userLoginMiddleware,
+    userRegisterMiddleware
 )(createStore);
 
 store = createStoreWithMiddleware(reducers, getInitialState(data), compose(
