@@ -4,7 +4,7 @@ namespace RST\Resq\Api;
 
 abstract class ApiAbstract {
 
-    protected $route;
+    protected $request;
 
     const UNAUTHORIZED = 403;
     const UNPROCESSABLE_ENTITY = 422;
@@ -16,9 +16,19 @@ abstract class ApiAbstract {
         500 => 'General error',
     );
 
-    public function init($route)
+    public function init($request)
     {
-        $this->route = $route;
+        $this->request = $request;
+    }
+
+    protected function getRequest()
+    {
+        return $this->request;
+    }
+
+    protected function getRequestEntityId()
+    {
+        return (int) $this->request->splat;
     }
 
     protected function requiredFields($data, $fields)
@@ -32,12 +42,21 @@ abstract class ApiAbstract {
 
     public function apiProblem($code, $module, $message)
     {
+        \Flight::response()->status($code);
         $response['code'] = $code;
         $response['errorType'] = $this->codes[$code];
         $response['module'] = $module;
         $response['message'] = $message;
 
         return ($response);
+    }
+
+    public function apiSuccess($code, $message)
+    {
+        \Flight::response()->status($code);
+        $response['code'] = $code;
+        $response['message'] = $message;
+        return $response;
     }
 
     protected function requireAuth()

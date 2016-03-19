@@ -43,6 +43,11 @@ Flight::route('PUT /rest/@module/*', function ($module, $route) {
     Flight::json($result);
 }, true);
 
+Flight::route('DELETE /rest/@module/*', function ($module, $route) {
+    $result = ClassFactory::create($module, $route, 'delete');
+    Flight::json($result);
+}, true);
+
 Flight::route('GET /gateway/@module/*', function ($module, $route) {
     $result = ClassFactory::create($module, $route, 'get', ClassFactory::TYPE_GATEWAY);
     Flight::json($result);

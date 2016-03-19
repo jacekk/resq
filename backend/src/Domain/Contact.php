@@ -20,6 +20,11 @@ class Contact extends AbstractDomain {
     protected $telephone;
 
     /**
+     * @var int
+     */
+    protected $user_id;
+
+    /**
      * @return int
      */
     public function getId()
@@ -66,5 +71,22 @@ class Contact extends AbstractDomain {
     {
         $this->telephone = $telephone;
     }
+
+    /**
+     * @return int
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param int $user_id
+     */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+    }
+
 
 }

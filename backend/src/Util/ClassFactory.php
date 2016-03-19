@@ -18,6 +18,8 @@ class ClassFactory {
                 $result = $class->$method();
             } catch (\Exception $e) {
                 $result = $class->apiProblem(500, 'Router', 'Error: ' . $e->getMessage());
+                debug_print_backtrace();
+                die();
             }
         } else {
             throw new \Exception($classType . ' module does not exist!');
