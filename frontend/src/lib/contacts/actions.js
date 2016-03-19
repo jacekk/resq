@@ -1,4 +1,4 @@
-import {CONTACT_CREATE} from '../constants';
+import {CONTACT_CREATE, CONTACT_REMOVE} from '../constants';
 
 export function contactCreate(id, name, telephone) {
     return {
@@ -21,6 +21,16 @@ export function contactCreate(id, name, telephone) {
                     msg: 'Invalid telephone'
                 }
             }
+        }
+    }
+}
+
+
+export function contactRemove(id) {
+    return {
+        type: CONTACT_REMOVE,
+        payload: {
+            id
         }
     }
 }

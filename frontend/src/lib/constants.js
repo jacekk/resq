@@ -1,5 +1,6 @@
 export const USER_CREATE = 'USER_CREATE';
 export const CONTACT_CREATE = 'CONTACT_CREATE';
+export const CONTACT_REMOVE = 'CONTACT_REMOVE';
 export const MIN_PASS_LENGTH = 6
 export const NOTIFY_ERROR = 'error';
 export const NOTIFY_SUCCESS = 'success';
