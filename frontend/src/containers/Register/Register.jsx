@@ -32,11 +32,6 @@ export default class Register extends React.Component {
         } else {
             this.props.dispatch(notify(NOTIFY_INFO, 'Pending...'));
             this.props.dispatch(registerRequest(email, password, telephone));
-            this.setState({
-                email: '',
-                password: '',
-                telephone: ''
-            });
         }
     }
 
