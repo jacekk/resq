@@ -2,6 +2,7 @@ export const API_URL = 'http://api.resq.banasiak.pro/rest/';
 
 export const USER_CREATE = 'USER_CREATE';
 export const USER_GET = 'USER_GET';
+export const CONTACTS_GET = 'USER_GET';
 export const PHONE_CONTACT_CREATE = 'PHONE_CONTACT_CREATE';
 export const ICE_CONTACT_CREATE = 'ICE_CONTACT_CREATE';
 export const ICE_CONTACT_REMOVE = 'ICE_CONTACT_REMOVE';

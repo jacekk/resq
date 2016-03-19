@@ -6,8 +6,8 @@ import user from "./lib/user/reducer";
 import notification from "./lib/notification/reducer";
 import phoneContacts from "./lib/phoneContacts/reducer";
 import iceContacts from "./lib/iceContacts/reducer";
-import request from "./lib/request/reducer";
 import {userRegisterMiddleware, userLoginMiddleware} from './middlewares/user';
+import {contactsGetMiddleware} from './middlewares/contacts';
 
 let store;
 
@@ -26,7 +26,6 @@ let reducers = combineReducers({
     notification,
     phoneContacts,
     iceContacts,
-    request,
     routing: routerReducer,
 });
 
@@ -37,6 +36,7 @@ import Validator from 'redux-validator';
 const validator = Validator();
 const createStoreWithMiddleware = applyMiddleware(
     validator,
+    contactsGetMiddleware,
     userLoginMiddleware,
     userRegisterMiddleware
 )(createStore);
