@@ -21,7 +21,7 @@ class Sms extends AbstractGateway {
         $phoneNumber = \Flight::request()->query->from;
 
         $actions = $actionRepository->getActionsByPhone($phoneNumber);
-        
+
         if ($actions->rowCount() > 0) {
 
             $markActions = array();
