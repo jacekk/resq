@@ -1,23 +1,22 @@
 import React from 'react';
-
 import {Circle} from 'rc-progress';
 
 import "!style!css!less!./circle.less";
 
 export default (props) => {
     return (
-        <div className="circle">
+        <div className="circle" onClick={props.onClick}>
             <div className="circle-progress">
                 <Circle
                     percent={props.percent}
-                    strokeWidth="2"
+                    strokeWidth="1"
                     strokeColor="#ed7d2c"
-                    trailColor="#000000"
+                    trailColor="#222222"
                 />
             </div>
             <div className="circle-text">
                 <div className="circle-clock">
-                    {props.time}
+                    {props.main}
                 </div>
                 <small className="circle-info">
                     {props.help}
