@@ -14,9 +14,21 @@ const createRequest = (next, state, resourceName) => {
                 return;
             }
             if (err && err.status && err.status === 422) {
-                next(notify(C.NOTIFY_ERROR, 'Wrong login or password.'));
+                if ('login' === resourceName) {
+                    next(notify(C.NOTIFY_ERROR, 'Wrong login or password.'));
+                } else {
+                    next(notify(C.NOTIFY_ERROR, err.message));
+                }
                 return;
             }
+            if ('register' === resourceName) {
+                window.location.hash = '/login';
+                setTimeout(() => {
+                    next(notify(C.NOTIFY_SUCCESS, 'Registration succesful. You can login now.'));
+                }, 3e3);
+                return;
+            }
+            next(notify(C.NOTIFY_ERROR, 'Unhandled situation. Let us now.'));
         });
 }
 
