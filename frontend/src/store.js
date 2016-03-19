@@ -8,6 +8,7 @@ import phoneContacts from "./lib/phoneContacts/reducer";
 import iceContacts from "./lib/iceContacts/reducer";
 import timer from "./lib/timer/reducer";
 import status from "./lib/status/reducer";
+import {statusMiddleware} from './middlewares/status';
 import {userRegisterMiddleware, userLoginMiddleware} from './middlewares/user';
 import {contactsGetMiddleware, contactAddMiddleware, contactDeleteMiddleware} from './middlewares/contacts';
 import {contactsRequest} from './lib/request/actions';
@@ -45,7 +46,8 @@ const createStoreWithMiddleware = applyMiddleware(
     contactAddMiddleware,
     contactDeleteMiddleware,
     userLoginMiddleware,
-    userRegisterMiddleware
+    userRegisterMiddleware,
+    statusMiddleware
 )(createStore);
 
 store = createStoreWithMiddleware(reducers, getInitialState(data), compose(

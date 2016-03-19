@@ -46,11 +46,10 @@ render(
 );
 
 function onDeviceReady() {
-    console.log('DEVICE READY');
     var watchId = navigator.geolocation.watchPosition(position => {
-        console.log('POSITION', position);
         let lastState = store.getState();
         let fullminutes = lastState.timer.get('minutes');
+        let msg = lastState.status.get('message');
         let lat = position.coords.latitude;
         let lng = position.coords.longitude;
         let expires = [];
@@ -59,7 +58,7 @@ function onDeviceReady() {
         expires.push(pad(fullminutes % 60));
         expires.push(pad(0));
 
-        store.dispatch(statusUpdate(expires.join(':'), lat, lng));
+        store.dispatch(statusUpdate(msg, expires.join(':'), lat, lng));
     });
 }
 

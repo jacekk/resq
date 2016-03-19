@@ -29,3 +29,10 @@ export const NOTIFICATION_HIDE = 'NOTIFICATION_HIDE';
 export const NOTIFY_ERROR = 'error';
 export const NOTIFY_SUCCESS = 'success';
 export const NOTIFY_INFO = 'info';
+
+export const TYPE_OK = 'ok';
+export const TYPE_RESQUE = 'resque';
+export const START = 'start';
+
+export const DEFAULT_MESSAGE_OK = "Went into a mine. Don't worry, I'm ok";
+export const DEFAULT_MESSAGE_RESQUE = "Went into a mine. I'm lost. Help me!";
