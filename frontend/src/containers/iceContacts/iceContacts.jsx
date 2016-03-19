@@ -1,12 +1,17 @@
 import React from 'react';
 import Contact from '../../components/Contact';
 import {iceContactRemove, iceContactCreate} from '../../lib/iceContacts/actions';
+import {contactsRequest} from '../../lib/request/actions';
 import {notify} from '../../lib/notification/actions';
 import {NOTIFY_ERROR} from '../../lib/constants';
 import uuid from 'node-uuid';
 
-
 export default class Contacts extends React.Component {
+
+    componentDidMount() {
+        this.props.dispatch(contactsRequest());
+    }
+
     removeHandler(id) {
         let action = iceContactRemove(id);
         let result = this.props.dispatch(action);
