@@ -1,4 +1,4 @@
-export const API_URL = 'http://api.resq.banasiak.pro/rest';
+export const API_URL = 'http://api.resq.banasiak.pro/rest/';
 
 export const USER_CREATE = 'USER_CREATE';
 export const PHONE_CONTACT_CREATE = 'PHONE_CONTACT_CREATE';
