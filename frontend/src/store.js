@@ -2,6 +2,7 @@ import {createStore, applyMiddleware, compose, Middleware, combineReducers} from
 import {fromJS, Map} from "immutable";
 
 import user from "./lib/user/reducer";
+import notification from "./lib/notification/reducer";
 import phoneContacts from "./lib/phoneContacts/reducer";
 import iceContacts from "./lib/iceContacts/reducer";
 import request from "./lib/request/reducer";
@@ -21,6 +22,7 @@ function getInitialState(source) {
 
 let reducers = combineReducers({
     user,
+    notification,
     phoneContacts,
     iceContacts,
     request,
