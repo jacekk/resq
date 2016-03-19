@@ -61,7 +61,7 @@ export default class Contacts extends React.Component {
         let preloader;
 
         if (this.state.request) {
-            prealoder = <div className="staticPreloader">
+            preloader = <div className="staticPreloader">
                 <span/>
                 <span/>
                 <span/>
