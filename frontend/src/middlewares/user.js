@@ -9,7 +9,7 @@ const createRequest = (next, state, resourceName) => {
         .send(state.user.get('account'))
         .set('Accept', 'application/json')
         .end((err, res) => {
-            if (res.body && res.body.message && res.body.message.session) {
+            if (res && res.body && res.body.message && res.body.message.session) {
                 next(userGetSuccess(res.body.message.session));
                 return;
             }
