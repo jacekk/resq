@@ -39,12 +39,19 @@ export default function timer(state = initialState, action) {
         case consts.TIMER_START:
             return state.set('started', true);
         case consts.TIMER_STOP:
-        case consts.TIMER_ENDED:
             return state.withMutations(map => {
                 map.set('minutes', state.get('initialMinutes'))
                    .set('percent', 100)
                    .set('started', false);
             });
+        case consts.TIMER_ENDED:
+            return state.withMutations(map => {
+                map.set('minutes', state.get('initialMinutes'))
+                   .set('percent', 100)
+                   .set('ended', true)
+                   .set('started', false);
+            });
+
     }
 
     return state;
