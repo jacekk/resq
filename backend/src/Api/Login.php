@@ -29,7 +29,7 @@ class Login extends ApiAbstract {
         // Check credentials
         $user->setPassword($postData->password);
 
-        $authCheck = $userRepository->fetch(null,
+        $authCheck = $userRepository->fetchStmt(null,
             "email = '{$postData->email}' AND password = '{$user->getPassword()}'");
 
 

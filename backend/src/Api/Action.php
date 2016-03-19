@@ -19,8 +19,6 @@ class Action extends ApiAbstract {
     public function post()
     {
         $action = new ActionDomain();
-        $actionRepository =
-
         $postData = \Flight::request()->data;
 
         try {
@@ -44,6 +42,7 @@ class Action extends ApiAbstract {
 
     public function put()
     {
+        $action = new ActionDomain();
 
     }
 
