@@ -46,8 +46,8 @@ export default class Login extends React.Component {
             <section className="section">
                 <div className="content">
                     <div className="alignCenter">
-						<img src="./svg/user.svg"/>
-						<h1>Login</h1>
+						<img src="./svg/resq.svg" width="250"/>
+						<h1>Resq Login</h1>
                     </div>
                     <form onSubmit={this.onSubmit}>
                         <p className="control">
