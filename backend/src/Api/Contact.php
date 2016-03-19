@@ -26,7 +26,7 @@ class Contact extends ApiAbstract {
         $contact->exchangeArray($this->getRepository()->fetch($this->getRequestEntityId()));
 
         if ($contact->getUserId() != $this->userId) {
-            \Flight::notFound();
+            return $this->apiProblem(403, 'Contact', 'Unauthorized');
         }
 
         return $contact->getArrayCopy();
@@ -61,7 +61,7 @@ class Contact extends ApiAbstract {
         $contact->exchangeArray($contactData);
 
         if ($contact->getUserId() != $this->userId) {
-            \Flight::notFound();
+            return $this->apiProblem(403, 'Contact', 'Unauthorized');
         } else {
             $this->getRepository()->delete($contact);
         }

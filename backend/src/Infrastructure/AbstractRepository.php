@@ -40,7 +40,7 @@ class AbstractRepository {
         );
     }
 
-    public function fetch($id, $where = null)
+    public function fetchStmt($id, $where = null)
     {
         $query = 'SELECT * FROM ' . $this->repositoryTable .' WHERE ' . ($where ? $where : 'id = ' . $id);
         try {
@@ -48,8 +48,22 @@ class AbstractRepository {
         } catch (\Exception $e) {
             throw new \Exception('[DB] DB error ' . $e->getMessage() .' in query ' . $query);
         }
+        return $result;
+    }
+
+    public function fetch($id, $where = null)
+    {
+        $result = $this->fetchStmt($id, $where);
 
         return $result->fetch();
+    }
+
+    public function exists($id, $where = null)
+    {
+        $result = $this->fetchStmt($id, $where);
+
+        return $result->rowCount() > 0;
+
     }
 
     public function prepareColsAndVals($data)

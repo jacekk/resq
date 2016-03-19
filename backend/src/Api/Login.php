@@ -20,7 +20,7 @@ class Login extends ApiAbstract {
         }
 
         // Check if user is already registered
-        $userCheck = $userRepository->fetch(null, 'email = \'' . addslashes($postData->email) .'\'');
+        $userCheck = $userRepository->fetchStmt(null, 'email = \'' . addslashes($postData->email) .'\'');
 
         if ($userCheck->rowCount() == 0) {
             return $this->apiProblem(self::UNPROCESSABLE_ENTITY, 'Register', 'User does not exists');
@@ -46,11 +46,10 @@ class Login extends ApiAbstract {
                 $session->commit();
             }
 
-            return array(
-                'result' => 'success',
+            return $this->apiSuccess(200, array(
                 'session' => session_id(),
                 'email' => $postData->email
-            );
+            ));
 
         } else {
             return $this->apiProblem(self::UNAUTHORIZED, 'Login', 'Password is incorrect!');

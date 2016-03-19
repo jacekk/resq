@@ -26,6 +26,11 @@ abstract class ApiAbstract {
         return $this->request;
     }
 
+    protected function setStatus($code)
+    {
+        \Flight::response()->status($code);
+    }
+
     protected function getRequestEntityId()
     {
         return (int) $this->request->splat;
@@ -40,23 +45,31 @@ abstract class ApiAbstract {
         }
     }
 
-    public function apiProblem($code, $module, $message)
+    public function apiProblem($code, $module, $message, $additionalValues = array())
     {
         \Flight::response()->status($code);
         $response['code'] = $code;
         $response['errorType'] = $this->codes[$code];
         $response['module'] = $module;
         $response['message'] = $message;
-
-        return ($response);
+        \Flight::response()->header('Content-type', 'application/json');
+        \Flight::response()->write(json_encode(array_merge($response, $additionalValues)));
+        \Flight::response()->sendHeaders();
+        \Flight::response()->send();
+        \Flight::stop();
+        return array_merge($response, $additionalValues);
     }
 
-    public function apiSuccess($code, $message)
+    public function apiSuccess($code, $message, $additionalValues = array())
     {
         \Flight::response()->status($code);
         $response['code'] = $code;
         $response['message'] = $message;
-        return $response;
+        \Flight::response()->header('Content-type', 'application/json');
+        \Flight::response()->write(json_encode(array_merge($response, $additionalValues)));
+        \Flight::response()->sendHeaders();
+        \Flight::response()->send();
+        \Flight::stop();
     }
 
     protected function requireAuth()

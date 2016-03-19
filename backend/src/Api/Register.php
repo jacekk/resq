@@ -21,7 +21,7 @@ class Register extends ApiAbstract {
         }
 
         // Check if user is already registered
-        $userCheck = $userRepository->fetch(null, 'email = \'' . addslashes($postData->email) .'\'');
+        $userCheck = $userRepository->fetchStmt(null, 'email = \'' . addslashes($postData->email) .'\'');
 
         if ($userCheck->rowCount() > 0) {
             return $this->apiProblem(self::UNPROCESSABLE_ENTITY, 'Register', 'User already exists');
@@ -32,6 +32,7 @@ class Register extends ApiAbstract {
         $user->setTelephone($postData->telephone);
         $user = $userRepository->persist($user);
 
+        $this->setStatus(201);
         return $user->getArrayCopy(false);
 
     }
