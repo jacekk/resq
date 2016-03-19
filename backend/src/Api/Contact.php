@@ -26,7 +26,7 @@ class Contact extends ApiAbstract {
         $contact->exchangeArray($this->getRepository()->fetch($this->getRequestEntityId()));
 
         if ($contact->getUserId() != $this->userId) {
-            return $this->apiProblem(403, 'Contact', 'Unauthorized');
+            return $this->apiProblem(403, 'Contact', 'Unauthorized fetch');
         }
 
         return $contact->getArrayCopy();
@@ -61,9 +61,10 @@ class Contact extends ApiAbstract {
         $contact->exchangeArray($contactData);
 
         if ($contact->getUserId() != $this->userId) {
-            return $this->apiProblem(403, 'Contact', 'Unauthorized');
+            return $this->apiProblem(403, 'Contact', 'Unauthorized deletion');
         } else {
             $this->getRepository()->delete($contact);
+            return $this->apiSuccess(200, 'Removed successfully');
         }
     }
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Field from '../../components/FormField';
 import {NOTIFY_ERROR, NOTIFY_INFO} from '../../lib/constants';
-import {userGet} from '../../lib/user/actions';
+import {userGet, clearSession} from '../../lib/user/actions';
 import {loginRequest} from '../../lib/request/actions';
 import {notify, hideNotification} from '../../lib/notification/actions';
 
@@ -15,6 +15,10 @@ export default class Login extends React.Component {
             email: '',
             password: '',
         };
+    }
+
+    componentDidMount() {
+        this.props.dispatch(clearSession());
     }
 
     onSubmit(ev) {

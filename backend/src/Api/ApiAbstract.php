@@ -9,11 +9,13 @@ abstract class ApiAbstract {
     const UNAUTHORIZED = 403;
     const UNPROCESSABLE_ENTITY = 422;
     const GENERAL_ERROR = 500;
+    const NOT_FOUND = 404;
 
     protected $codes = array (
         403 => 'Unauthorized',
         422 => 'Unprocessable Entity',
         500 => 'General error',
+        404 => 'Not found',
     );
 
     public function init($request)

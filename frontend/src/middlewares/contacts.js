@@ -1,5 +1,6 @@
 import superagent from 'superagent';
 import * as C from '../lib/constants';
+import {contactsLoaded} from '../lib/request/actions'
 import {notify, hideNotification} from '../lib/notification/actions';
 
 export function contactsGetMiddleware({ getState }) {
@@ -16,14 +17,16 @@ export function contactsGetMiddleware({ getState }) {
             }
 
             return superagent
-              .get(C.API_URL + 'contacts')
-              .set('Accept', 'application/json')
-              .set('Authorization', sessionId)
-              .end((err, res) => {
-                  if (err || !res.body) {
+                .get(C.API_URL + 'contacts')
+                .set('Accept', 'application/json')
+                .set('Authorization', sessionId)
+                .end((err, res) => {
+                    if (err || !res.body) {
                         window.location.hash = '/';
-                  }
-              });
+                        return;
+                    }
+                    return next(contactsLoaded(res.body));
+                });
         };
     };
 };

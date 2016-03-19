@@ -10,6 +10,11 @@ if (isset($headers['Authorization'])) {
 use RST\Resq\Util\ClassFactory;
 
 error_reporting(E_ALL);
+session_set_cookie_params(60*60*24);
+ini_set('session.gc_maxlifetime', 60*60*24);
+ini_set('session.gc_maxlifetime',30*60);
+ini_set('session.gc_probability',1);
+ini_set('session.gc_divisor',1);
 ini_set('display_errors', true);
 
 require '../vendor/autoload.php';
@@ -17,6 +22,8 @@ require '../vendor/autoload.php';
 Flight::register('db', 'PDO', array('mysql:host=localhost;port=3306;dbname=resq_app', 'resq_app', 'softmasters'), function($db) {
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 });
+
+Flight::set('flight.views.path', dirname(__FILE__) . '/views/');
 
 // Initialize the session
 $sessionFactory = new \Aura\Session\SessionFactory;
@@ -35,6 +42,18 @@ Flight::route('OPTIONS *', function () {
         die();
 });
 
+Flight::route('POST /rest/@module/put/*', function ($module, $route) {
+    $result = ClassFactory::create($module, $route, 'put');
+    Flight::json($result);
+    die();
+}, true);
+
+Flight::route('GET /rest/@module/delete/*', function ($module, $route) {
+    $result = ClassFactory::create($module, $route, 'delete');
+    Flight::json($result);
+    die();
+}, true);
+
 Flight::route('POST /rest/@module/*', function ($module, $route) {
     $result = ClassFactory::create($module, $route, 'post');
     Flight::json($result);
@@ -45,7 +64,7 @@ Flight::route('GET /rest/@module/*', function ($module, $route) {
     Flight::json($result);
 }, true);
 
-Flight::route('PUT /rest/@module/*', function ($module, $route) {
+Flight::route('PUT /rest/@module/put*', function ($module, $route) {
     $result = ClassFactory::create($module, $route, 'put');
     Flight::json($result);
 }, true);
@@ -55,14 +74,16 @@ Flight::route('DELETE /rest/@module/*', function ($module, $route) {
     Flight::json($result);
 }, true);
 
+
+
 Flight::route('GET /gateway/@module/*', function ($module, $route) {
     $result = ClassFactory::create($module, $route, 'get', ClassFactory::TYPE_GATEWAY);
     Flight::json($result);
 }, true);
 
-Flight::route('GET /s/@hash', function($hash) {
-
-});
+Flight::route('GET /s/@module', function($hash, $route) {
+    $result = ClassFactory::create('Landing', $route, 'get', ClassFactory::TYPE_WEB);
+}, true);
 
 Flight::route('/', function(){
     echo 'Resq Backend API';

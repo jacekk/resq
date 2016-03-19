@@ -20,6 +20,15 @@ export function loginRequest(email, password) {
 
 export function contactsRequest() {
     return {
-        type: C.CONTACTS_GET,
+        type: C.CONTACTS_GET
+    }
+}
+
+export function contactsLoaded(contacts) {
+    return {
+        type: C.CONTACTS_LOADED,
+        payload: {
+            contacts
+        }
     }
 }

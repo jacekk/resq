@@ -5,6 +5,7 @@ namespace RST\Resq\Infrastructure;
 use RST\Resq\Domain\Action;
 
 class ActionRepository extends AbstractRepository {
+    const HASH_CONST = 'jflkejfkljds324234er3242r524f';
     protected $repositoryTable = 'actions';
 
     public function setStatus($actions, $status)
@@ -26,5 +27,12 @@ class ActionRepository extends AbstractRepository {
         return $this->getDb()->query('SELECT a.*, u.telephone FROM actions a LEFT JOIN users u ON u.id = a.user_id
           WHERE u.id = \'' . (int) $userId .'\'
           AND a.status != ' . Action::STATUS_DISABLED);
+    }
+
+    public function getByHash($hash)
+    {
+        return $this->getDb()->query(
+            'SELECT * FROM actions
+            WHERE SHA1(CONCAT(user_id, id, \'' . self::HASH_CONST  . '\')) = \'' . $hash .'\'');
     }
 }
