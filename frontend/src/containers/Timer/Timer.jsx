@@ -112,6 +112,7 @@ export default class Timer extends React.Component {
         let ended = this.props.timer.get('ended');
         let mainText;
         let helpText;
+		let top = '';
 
 		if (ended) {
             mainText = 'Alert';
@@ -138,24 +139,28 @@ export default class Timer extends React.Component {
 				onChange={this.timePickerChanged}
 			/>;
 
+			top = (
+				<div className="hGrid">
+					<div className="hGrid-left">
+						<a href="#/contacts">
+							<img src="./svg/contacts.svg" />
+						</a>
+					</div>
+					<div className="hGrid-right">
+						<a>
+							<img src="./svg/settings.svg" style={{opacity: 0.2}} />
+						</a>
+					</div>
+				</div>
+			);
+
             mainText = 'Start';
             helpText = 'Click to start';
        }
 		return (
 			<div className="vGrid section">
 				<div className="vGrid-headerButtons">
-					<div className="hGrid">
-						<div className="hGrid-left">
-							<a href="#/contacts">
-								<img src="./svg/contacts.svg" />
-							</a>
-						</div>
-						<div className="hGrid-right">
-							<a>
-								<img src="./svg/settings.svg" style={{opacity: 0.2}} />
-							</a>
-						</div>
-					</div>
+					{top}
 				</div>
 				<div className="vGrid-timerCircle">
 					<Circle
