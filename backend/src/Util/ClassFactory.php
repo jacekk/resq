@@ -4,9 +4,12 @@ namespace RST\Resq\Util;
 
 class ClassFactory {
 
-    public static function create($name, $method)
+    const TYPE_API = 'Api';
+    const TYPE_GATEWAY = 'Gateway';
+
+    public static function create($name, $method, $classType = self::TYPE_API)
     {
-        $className = '\\RST\\Resq\\Api\\' . ucfirst($name);
+        $className = '\\RST\\Resq\\' . $classType . '\\' . ucfirst($name);
 
         if (class_exists($className)) {
             $class = new $className;
@@ -17,7 +20,7 @@ class ClassFactory {
                 $result = $class->apiProblem(500, 'Router', 'Error: ' . $e->getMessage());
             }
         } else {
-            throw new \Exception('API module does not exist!');
+            throw new \Exception($classType . ' module does not exist!');
         }
 
         return $result;

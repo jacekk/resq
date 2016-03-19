@@ -38,7 +38,7 @@ Flight::route('PUT /rest/@module/*', function ($module) {
 Flight::route('GET /gateway/@module/*', function ($module) {
     $result = ClassFactory::create($module, 'get', ClassFactory::TYPE_GATEWAY);
     Flight::json($result);
-})
+});
 
 Flight::route('/', function(){
     echo 'Resq Backend API';

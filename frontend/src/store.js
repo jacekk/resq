@@ -4,6 +4,8 @@ import {fromJS, Map} from "immutable";
 import user from "./lib/user/reducer";
 import phoneContacts from "./lib/phoneContacts/reducer";
 import iceContacts from "./lib/iceContacts/reducer";
+import request from "./lib/request/reducer";
+import userRegisterMiddleware from './middlewares/user/register';
 
 let store;
 
@@ -21,6 +23,7 @@ let reducers = combineReducers({
     user,
     phoneContacts,
     iceContacts
+    request,
 });
 
 let data = {};
@@ -28,7 +31,10 @@ let data = {};
 import Validator from 'redux-validator';
 
 const validator = Validator();
-const createStoreWithMiddleware = applyMiddleware(validator)(createStore);
+const createStoreWithMiddleware = applyMiddleware(
+  validator,
+  userRegisterMiddleware
+)(createStore);
 
 store = createStoreWithMiddleware(reducers, getInitialState(data), compose(
     window.devToolsExtension ? window.devToolsExtension() : f => f
