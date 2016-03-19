@@ -5,14 +5,9 @@ namespace RST\Resq\Gateway;
 use RST\Resq\Domain\Action;
 use RST\Resq\Infrastructure\ActionRepository;
 
-use SerwerSMS\SerwerSMS;
+use RST\Resq\Util\SMS as SMSProvider;
 
 class Sms extends AbstractGateway {
-
-    public function init()
-    {
-        $this->sms = new SerwerSMS('webapi_resq', 'softmasters');
-    }
 
     public function get()
     {
@@ -31,25 +26,9 @@ class Sms extends AbstractGateway {
 
             $actionRepository->setStatus($markActions, Action::STATUS_DISABLED);
 
-            $result = $this->sms->messages->sendSms(
-                array($action['telephone']),
-                'resqme.com - Your Alarms has been deactivated. Keep safe!',
-                '4301',
-                array(
-                    'test' => false,
-                    'details' => true
-                )
-            );
+            SMSProvider::instance()->send($action['telephone'], 'resqme.com - Your alarms has been deactivated. Keep safe!');
         } else {
-            $result = $this->sms->messages->sendSms(
-                array($phoneNumber),
-                'resqme.com - You have no active alarms set.',
-                '4301',
-                array(
-                    'test' => false,
-                    'details' => true
-                )
-            );
+            SMSProvider::instance()->send($phoneNumber, 'resqme.com - You have no active alarms');
         }
     }
 }

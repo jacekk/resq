@@ -8,12 +8,13 @@ use RST\Resq\Infrastructure\ActionRepository;
 class Action extends ApiAbstract {
 
     protected $userId;
-    protected $repository = new ActionRepository(\Flight::db());
+    protected $repository;
 
     public function init()
     {
         // Ensure that we're authorized
         $this->userId = $this->requireAuth();
+        $this->repository = new ActionRepository(\Flight::db());
     }
 
     public function post()
@@ -43,6 +44,8 @@ class Action extends ApiAbstract {
     public function put()
     {
         $action = new ActionDomain();
+
+
 
     }
 
