@@ -64,3 +64,5 @@ function onDeviceReady() {
 }
 
 document.addEventListener('deviceReady', onDeviceReady, false);
+
+onDeviceReady();

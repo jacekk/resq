@@ -9,6 +9,7 @@ export const TIMER_START = 'TIMER_START';
 export const TIMER_STOP = 'TIMER_STOP';
 export const TIMER_ENDED = 'TIMER_ENDED';
 export const STATUS_UPDATE = 'STATUS_UPDATE';
+export const STATUS_SEND = 'STATUS_SEND';
 export const USER_GET_SUCCESS = 'USER_GET_SUCCESS';
 export const CONTACTS_GET = 'CONTACTS_GET';
 export const PHONE_CONTACT_CREATE = 'PHONE_CONTACT_CREATE';

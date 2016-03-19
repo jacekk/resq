@@ -10,6 +10,7 @@ const initialState = Map({
 
 export default function status(state = initialState, action) {
     switch (action.type) {
+        case consts.STATUS_SEND:
         case consts.STATUS_UPDATE:
             return state.withMutations(map => {
                 map.set('expires', action.payload.expires);

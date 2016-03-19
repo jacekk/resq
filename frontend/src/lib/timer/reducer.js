@@ -1,7 +1,7 @@
 import * as consts from '../constants';
 import {Map} from "immutable";
 
-const MINUTES = 10;
+const MINUTES = 90;
 
 const initialState = Map({
     started: false,

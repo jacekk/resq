@@ -7,8 +7,12 @@ const REFRESH_RATE = 1000;
 const MILISECONDS = 1000;
 const ADDITIONAL_HOUR = 60;
 const ADDITIONAL_MINUTES = 10;
+const STATUS_SENT_INTERVAL = 60000 * 0.25;
 
 import * as actions from '../../lib/timer/actions';
+
+import {statusSend, statusUpdate} from '../../lib/status/actions';
+
 export default class Timer extends React.Component {
 	constructor(state, props) {
 		super();
@@ -21,6 +25,7 @@ export default class Timer extends React.Component {
 
 		this.toogle = this.toogle.bind(this);
 		this.timePickerChanged = this.timePickerChanged.bind(this);
+        this.lastSentStatusTime = 0;
 	}
 
     componentDidMount() {
@@ -34,6 +39,7 @@ export default class Timer extends React.Component {
         clearInterval(this.tid);
     }
 
+
     updateClock() {
         let minutes = this.props.timer.get('minutes');
 
@@ -44,7 +50,24 @@ export default class Timer extends React.Component {
             this.props.dispatch(actions.timerEnded());
         } else {
             this.props.dispatch(actions.timerUpdate(minutes));
+            this.sendStatusUpdate();
+            return;
         }
+        if (Date.now() - this.lastSentStatusTime >= STATUS_SENT_INTERVAL) {
+            this.sendStatusUpdate();
+            this.lastSentStatusTime = Date.now();
+        }
+    }
+
+    sendStatusUpdate() {
+        let fullminutes = this.props.timer.get('minutes');
+        let lat = this.props.status.get('lat');
+        let lng = this.props.status.get('lng');
+        let expires = [];
+        expires.push(pad(Math.floor(fullminutes / 60)));
+        expires.push(pad(fullminutes % 60));
+        expires.push(pad(0));
+        store.dispatch(statusUpdate(expires.join(':'), lat, lng));
     }
 
 	toogle() {
