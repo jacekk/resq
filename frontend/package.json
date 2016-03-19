@@ -45,10 +45,11 @@
   },
   "dependencies": {
     "babel-plugin-syntax-decorators": "^6.5.0",
-    "rc-progress": "^1.0.4",
     "chai": "^3.5.0",
+    "email-validator": "^1.0.4",
     "flux-standard-action": "^0.6.1",
     "immutable": "^3.7.6",
+    "rc-progress": "^1.0.4",
     "react-redux": "^4.4.1",
     "redux": "^3.3.1",
     "redux-actions": "^0.9.1",

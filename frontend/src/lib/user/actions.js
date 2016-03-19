@@ -1,4 +1,5 @@
-import {USER_CREATE} from '../constants';
+import {USER_CREATE, MIN_PASS_LENGTH} from '../constants';
+import emailValidator from 'email-validator';
 
 export function userCreate(email, password, telephone) {
     return {
@@ -10,9 +11,19 @@ export function userCreate(email, password, telephone) {
             validator: {
                 email: {
                     func: (email) => {
-                        return !!email;
+                        return emailValidator.validate(email);
                     },
                     msg: 'Invalid email'
+                },
+                password: {
+                    func: (password) => {
+                        return password.length >= MIN_PASS_LENGTH;
+                    },
+                    msg: 'Invalid password'
+                },
+                telephone: {
+                    func: (telephone) => !!telephone,
+                    msg: 'Invalid telephone'
                 }
             }
         }
