@@ -58,10 +58,21 @@ export default class Contacts extends React.Component {
     }
 
     render() {
+        let preloader;
+
+        if (this.state.request) {
+            prealoder = <div className="staticPreloader">
+                <span/>
+                <span/>
+                <span/>
+            </div>
+        }
+
         return (
             <section className="section contactsList">
                 <div className="content">
                     <h2>Choose contact</h2>
+                    {preloader}
                     <ul>
                         {this.state.contacts.map(contact => <Contact key={contact.id}
                                             name={contact.name} telephone={contact.telephone}

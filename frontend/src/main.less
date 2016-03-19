@@ -80,3 +80,37 @@ a {
         }
     }
 }
+
+
+.staticPreloader {
+    @size: 100px;
+    width: @size;
+    height: @size;
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    left: 50%;
+    right: 50%;
+    margin: -50px 0 0 -50px;
+    z-index: 1;
+
+    span {
+        position: absolute;
+        background: #666;
+        width: 10px;
+        height: 10px;
+        border-radius: 10px;
+        top: 50%;
+        left: 50%;
+        margin: -5px 0 0 -5px;
+    }
+
+    span:first-child {
+        left: 10%;
+    }
+
+    span:last-child {
+        right: 10%;
+        left: auto;
+    }
+}
