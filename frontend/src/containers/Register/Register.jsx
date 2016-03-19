@@ -27,7 +27,6 @@ export default class Register extends React.Component {
         let {email, password, telephone} = this.state;
         let action = userCreate(email, password, telephone);
         let result = this.props.dispatch(action);
-        console.log('dispatch result', result);
         if (result.err) {
             this.notify(result, NOTIFY_ERROR);
         } else {
@@ -37,9 +36,9 @@ export default class Register extends React.Component {
                 password: '',
                 telephone: ''
             });
-            // this.notify({
-            //     msg: "Account created"
-            // }, NOTIFY_SUCCESS);
+            this.notify({
+                msg: 'Pending...'
+            }, NOTIFY_INFO);
         }
     }
 
