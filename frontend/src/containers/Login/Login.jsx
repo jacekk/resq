@@ -26,10 +26,6 @@ export default class Login extends React.Component {
         } else {
             this.props.dispatch(notify(NOTIFY_INFO, 'Pending...'));
             this.props.dispatch(loginRequest(email, password));
-            this.setState({
-                email: '',
-                password: ''
-            });
         }
     }
 
