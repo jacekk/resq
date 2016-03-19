@@ -3,7 +3,7 @@ import React from 'react';
 export default class Contact extends React.Component {
     render() {
         return (
-            <li>
+            <li onClick={this.selectHandler.bind(this)}>
                 <strong>{this.props.name}</strong>
                 {this.props.telephone}
                 {this.renderButton()}
@@ -14,7 +14,14 @@ export default class Contact extends React.Component {
     removeHandler(e) {
         e.preventDefault();
         if (typeof this.props.onRemove === 'function') {
-            this.props.onRemove(this.props.id, 'wtf', this.props);
+            this.props.onRemove(this.props.id);
+        }
+    }
+
+    selectHandler(e) {
+        e.preventDefault();
+        if (typeof this.props.onSelect === 'function') {
+            this.props.onSelect(this.props);
         }
     }
 

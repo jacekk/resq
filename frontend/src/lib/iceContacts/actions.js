@@ -12,7 +12,7 @@ export function iceContactCreate(id, name, telephone) {
         meta: {
             validator: {
                 id: {
-                    func: (id) => typeof id === 'number',
+                    func: (id) => typeof id === 'string',
                     msg: 'Invalid id'
                 },
                 name: {

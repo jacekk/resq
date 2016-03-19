@@ -52,6 +52,7 @@
     "email-validator": "^1.0.4",
     "flux-standard-action": "^0.6.1",
     "immutable": "^3.7.6",
+    "node-uuid": "^1.4.7",
     "rc-progress": "^1.0.4",
     "react-redux": "^4.4.1",
     "redux": "^3.3.1",

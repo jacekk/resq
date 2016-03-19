@@ -1,36 +1,28 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Provider, connect} from 'react-redux';
-import {Router, Route, IndexRoute, Link, hashHistory} from 'react-router'
+import {Router, Route, IndexRoute, Link, hashHistory, RouterContext} from 'react-router'
 
 import './phone';
 
 import AppContainer from './containers/App';
-import ContactsContainer from './containers/Contacts';
+import iceContactsContainer from './containers/iceContacts';
+import phoneContactsContainer from './containers/phoneContacts';
 import RegisterContainer from './containers/Register';
 import LoginContainer from './containers/Login';
 import TimerContainer from './containers/Timer';
 
 const App = connect(state => state)(AppContainer);
-const Contacts = connect(state => state)(ContactsContainer);
+const iceContacts = connect(state => state)(iceContactsContainer);
+const phoneContacts = connect(state => state)(phoneContactsContainer);
 const Register = connect(state => state)(RegisterContainer);
 const Login = connect(state => state)(LoginContainer);
 const Timer = connect(state => state)(TimerContainer);
-
 
 import store from './store';
 
 import "!style!css!../node_modules/bulma/css/bulma.css";
 import "!style!css!less!./main.less";
-
-const ContactsAdd = () => {
-    return (
-        <div>
-            <Menu />
-            <p>ContactsAdd</p>
-        </div>
-    );
-}
 
 render(
     <Provider store={store}>
@@ -39,9 +31,10 @@ render(
             <IndexRoute component={Login}/>
             <Route path="register" component={Register}/>
             <Route path="timer" component={Timer}/>
-            <Route path="contacts" component={Contacts}>
-              <Route path="add" component={ContactsAdd}/>
+            <Route path="contacts" component={iceContacts}>
+              <Route path="add" component={phoneContacts}/>
             </Route>
+            <Route path="contactpicker" component={phoneContacts}/>
           </Route>
         </Router>
     </Provider>,
