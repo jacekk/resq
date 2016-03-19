@@ -1,4 +1,9 @@
 import React from 'react';
+import {userCreate} from '../../lib/user/actions';
+
+const NOTIFY_ERROR = 'error';
+const NOTIFY_SUCCESS = 'success';
+const NOTIFY_INFO = 'info';
 
 export default class Register extends React.Component {
     constructor() {
@@ -9,12 +14,39 @@ export default class Register extends React.Component {
             email: '',
             password: '',
             telephone: '',
+            notification: {
+                value: '',
+                text: ''
+            }
         };
     }
 
     onSubmit(ev) {
         ev.preventDefault();
-        console.log('submitted:', this.state);
+        let {email, password, telephone} = this.state;
+        let action = userCreate(email, password, telephone);
+        let result = this.props.dispatch(action);
+        if (result.err) {
+            this.notify(result, NOTIFY_ERROR);
+        } else {
+            this.setState({
+                email: '',
+                password: '',
+                telephone: ''
+            });
+            this.notify({
+                msg: "Account created"
+            }, NOTIFY_SUCCESS);
+        }
+    }
+
+    notify(result, type = NOTIFY_INFO) {
+        this.setState({
+            notification: {
+                type,
+                text: result.msg
+            }
+        });
     }
 
     handleChange(ev) {
@@ -28,6 +60,7 @@ export default class Register extends React.Component {
         return (
             <div>
                 <h3>Register form</h3>
+                {this.renderNotification()}
                 <form onSubmit={this.onSubmit}>
                     <div className="input-wrapper">
                         <label htmlFor="email">Email:</label>
@@ -60,6 +93,17 @@ export default class Register extends React.Component {
                         Register
                     </button>
                 </form>
+            </div>
+        )
+    }
+
+    renderNotification() {
+        if (!this.state.notification.text) {
+            return null;
+        }
+        return (
+            <div className={this.state.notification.type}>
+                {this.state.notification.text}
             </div>
         )
     }

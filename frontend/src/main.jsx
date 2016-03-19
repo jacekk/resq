@@ -5,10 +5,16 @@ import {Router, Route, IndexRoute, Link, hashHistory} from 'react-router'
 
 import './phone';
 
-import App from './containers/App';
-import Contacts from './containers/Contacts';
-import Register from './containers/Register';
-import Login from './containers/Login';
+import AppContainer from './containers/App';
+import ContactsContainer from './containers/Contacts';
+import RegisterContainer from './containers/Register';
+import LoginContainer from './containers/Login';
+
+const App = connect(state => state)(AppContainer);
+const Contacts = connect(state => state)(ContactsContainer);
+const Register = connect(state => state)(RegisterContainer);
+const Login = connect(state => state)(LoginContainer);
+
 
 import store from './store';
 
@@ -24,8 +30,8 @@ const ContactsAdd = () => {
     );
 }
 
-
 render(
+    <Provider store={store}>
         <Router history={hashHistory}>
           <Route path="/" component={App}>
             <IndexRoute component={Login}/>
@@ -34,6 +40,7 @@ render(
               <Route path="add" component={ContactsAdd}/>
             </Route>
           </Route>
-        </Router>,
+        </Router>
+    </Provider>,
     document.getElementById('app')
 );

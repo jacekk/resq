@@ -15,6 +15,16 @@ function getInitialState(source) {
     return immutableState;
 }
 
+
 let reducers = combineReducers({user});
 let data = {};
-export default store = (createStore)(reducers, getInitialState(data));
+
+
+import Validator from 'redux-validator';
+
+const validator = Validator();
+const createStoreWithMiddleware = applyMiddleware(validator)(createStore);
+
+export default store = createStoreWithMiddleware(reducers, getInitialState(data), compose(
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+));

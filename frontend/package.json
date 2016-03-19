@@ -44,6 +44,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "babel-plugin-syntax-decorators": "^6.5.0",
     "chai": "^3.5.0",
     "flux-standard-action": "^0.6.1",
     "immutable": "^3.7.6",
