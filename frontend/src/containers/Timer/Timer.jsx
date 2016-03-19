@@ -18,7 +18,7 @@ export default class Timer extends React.Component {
 		super();
 		this.initialState = {
 			mainText: 'Start',
-			helpText: 'Click to start',
+			helpText: 'Click to start'
 		};
 
 		this.state = this.initialState;
@@ -109,10 +109,15 @@ export default class Timer extends React.Component {
         let hours = Math.floor(fullminutes / 60);
         let percent = (this.props.timer.get('percent')-100)*-1;
         let started = this.props.timer.get('started');
+        let ended = this.props.timer.get('ended');
         let mainText;
         let helpText;
 
-		if (started) {
+		if (ended) {
+            mainText = 'Alert';
+            helpText = 'Help message was sended';
+			percent = 100;
+		} else if (started) {
 			bottom = (
 				<div className="hGrid">
 					<div className="hGrid-left">
