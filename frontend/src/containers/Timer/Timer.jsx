@@ -84,10 +84,11 @@ export default class Timer extends React.Component {
         let fullminutes = this.props.timer.get('minutes');
         let minutes = fullminutes % 60;
         let hours = Math.floor(fullminutes / 60);
-        let percent = this.props.timer.get('percent');
+        let percent = (this.props.timer.get('percent')-100)*-1;
         let started = this.props.timer.get('started');
         let mainText;
         let helpText;
+
 		if (started) {
 			bottom = (
 				<div className="hGrid">
@@ -102,6 +103,7 @@ export default class Timer extends React.Component {
             mainText = `${hours}:${pad(minutes)}`;
             helpText = 'Click to end';
 		} else {
+			percent = -100;
 			bottom = <TimePicker
 				hours={hours}
 				minutes={minutes}
@@ -112,14 +114,18 @@ export default class Timer extends React.Component {
             helpText = 'Click to start';
        }
 		return (
-			<div className="vGrid">
+			<div className="vGrid section">
 				<div className="vGrid-headerButtons">
 					<div className="hGrid">
 						<div className="hGrid-left">
-							<img src="./svg/contacts.svg" />
+							<a href="#/contacts">
+								<img src="./svg/contacts.svg" />
+							</a>
 						</div>
 						<div className="hGrid-right">
-							<img src="./svg/settings.svg" />
+							<a>
+								<img src="./svg/settings.svg" style={{opacity: 0.2}} />
+							</a>
 						</div>
 					</div>
 				</div>
