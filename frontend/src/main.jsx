@@ -20,7 +20,7 @@ const Timer = connect(state => state)(TimerContainer);
 
 import store from './store';
 
-// import "!style!css!../node_modules/bulma/css/bulma.css";
+import "!style!css!../node_modules/normalize-css/normalize.css";
 import "!style!css!less!./main.less";
 
 const history = syncHistoryWithStore(hashHistory, store);
@@ -47,7 +47,7 @@ function onPause() {
 }
 
 function onResume() {
-    
+
 }
 
 document.addEventListener('pause', onPause, false);

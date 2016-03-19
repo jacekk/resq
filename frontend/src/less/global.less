@@ -1,0 +1,40 @@
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body, html {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    color: @textColor;
+    background: @bgColor;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+a {
+    color: #CCC;
+    &:hover {
+        color: #FFF;
+    }
+}
+
+.or {
+    display: block;
+    font-size: 11px;
+    color: rgba(255, 255, 255, .3);
+    white-space: nowrap;
+    padding: 2em 0;
+    text-align: center;
+
+    &::after,
+    &::before {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        height: 1px;
+        width: 50px;
+        margin: 0 1em;
+        background: rgba(255, 255, 255, .15);
+    }
+}
