@@ -21,14 +21,17 @@ const createRequest = (next, state, resourceName) => {
                 }
                 return;
             }
-            if ('register' === resourceName) {
-                window.location.hash = '/login';
-                setTimeout(() => {
-                    next(notify(C.NOTIFY_SUCCESS, 'Registration succesful. You can login now.'));
-                }, 3e3);
+            if ('login' === resourceName) {
+                next(notify(
+                    C.NOTIFY_ERROR,
+                    res && res.body && res.body.message || 'Unhandled situation. Let us now.'
+                ));
                 return;
             }
-            next(notify(C.NOTIFY_ERROR, 'Unhandled situation. Let us now.'));
+            window.location.hash = '/login';
+            setTimeout(() => {
+                next(notify(C.NOTIFY_SUCCESS, 'Registration succesful. You can login now.'));
+            }, 3e3);
         });
 }
 
