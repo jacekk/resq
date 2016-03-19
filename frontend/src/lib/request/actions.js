@@ -17,3 +17,9 @@ export function loginRequest(email, password) {
         }
     }
 }
+
+export function contactsRequest() {
+    return {
+        type: C.CONTACTS_GET,
+    }
+}
