@@ -51,11 +51,12 @@ a {
         position: absolute;
         padding: 0;
         top: 55px;
-        bottom: 60px;
+        bottom: 0px;
         left: -28px;
         right: -28px;
         overflow: auto;
         background: #D8D8D8;
+        margin-bottom: 0;
 
         li {
             position: relative;
@@ -78,17 +79,6 @@ a {
 
         li:last-child {
             border-bottom: 0;
-        }
-    }
-
-    footer {
-        position: absolute;
-        bottom: 20px;
-        left: 20px;
-        right: 20px;
-
-        button {
-            float: right;
         }
     }
 }
@@ -138,5 +128,18 @@ a {
     h2 {
         margin: 0 !important;
         padding: 0 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
+}
+
+#bigFatAdd {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 50px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    width: 60px;
+    height: 60px;
 }

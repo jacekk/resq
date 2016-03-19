@@ -30,6 +30,7 @@ export default class Contacts extends React.Component {
                         telephone: contact.phoneNumbers && contact.phoneNumbers[0] && contact.phoneNumbers[0].value
                     })).filter(contact => contact.name && contact.telephone);
                     self.setState({
+                        request: false,
                         contacts: results
                     });
                 }
@@ -84,11 +85,6 @@ export default class Contacts extends React.Component {
                                             onSelect={this.handleSelect.bind(this)}/>
                         )}
                     </ul>
-                    <footer>
-                        <p className="control">
-                            <button className="button is-info" onClick={this.handleCancellation.bind(this)}>Cancel</button>
-                        </p>
-                    </footer>
                 </div>
             </section>
         )

@@ -18,7 +18,7 @@ export default class Contacts extends React.Component {
     }
     render() {
         return (
-            <section className="section contactsList">
+            <section className="section contactsList" id="iceContacts">
                 <div className="content">
                     <header className="mobileHeader">
                         <button className="button" onClick={this.handleCancellation.bind(this)}>
@@ -32,8 +32,10 @@ export default class Contacts extends React.Component {
                             return <Contact key={obj.id} id={obj.id} name={obj.name} telephone={obj.telephone} onRemove={this.removeHandler.bind(this)}/>
                         })}
                     </ul>
-
                     {this.renderNotification()}
+                    <button id="bigFatAdd" className="button is-success" onClick={this.addHandler.bind(this)}>
+                        <i className="fa fa-plus"></i>
+                    </button>
                 </div>
             </section>
         )
@@ -42,7 +44,6 @@ export default class Contacts extends React.Component {
         return this.props.iceContacts.size ? '' :
         <div className="notification">
             <p>No contacts available. You can add one right now.</p>
-            <p><button className="button is-success" onClick={this.addHandler.bind(this)}>add one</button></p>
         </div>;
     }
 }
