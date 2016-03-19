@@ -8,6 +8,7 @@ use RST\Resq\Infrastructure\ActionRepository;
 class Action extends ApiAbstract {
 
     protected $userId;
+    protected $repository = new ActionRepository(\Flight::db());
 
     public function init()
     {
@@ -18,7 +19,7 @@ class Action extends ApiAbstract {
     public function post()
     {
         $action = new ActionDomain();
-        $actionRepository = new ActionRepository(\Flight::db());
+        $actionRepository =
 
         $postData = \Flight::request()->data;
 
@@ -36,9 +37,18 @@ class Action extends ApiAbstract {
         $action->setCreated();
         $action->setStatus(ActionDomain::STATUS_ACTIVE);
 
-        $action = $actionRepository->persist($action);
+        $action = $this->getRepository()->persist($action);
 
         return $action->getArrayCopy();
     }
 
+    public function put()
+    {
+
+    }
+
+    protected function getRepository()
+    {
+        return $this->repository;
+    }
 }
