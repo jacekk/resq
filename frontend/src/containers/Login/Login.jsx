@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Field from '../../components/FormField';
+
 export default class Login extends React.Component {
 	constructor() {
         super();
@@ -28,24 +30,8 @@ export default class Login extends React.Component {
             <div>
                 <h3>Login form</h3>
                 <form onSubmit={this.onSubmit}>
-                    <div className="input-wrapper">
-                        <label htmlFor="email">Email:</label>
-                        <input
-                            name="email"
-                            type="email"
-                            value={this.state.email}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div className="input-wrapper">
-                        <label htmlFor="password">Password:</label>
-                        <input
-                            name="password"
-                            type="password"
-                            value={this.state.password}
-                            onChange={this.handleChange}
-                        />
-                    </div>
+                    <Field name="email" label="Email" binding={this.handleChange} type="email"/>
+                    <Field name="password" label="Password" binding={this.handleChange} type="password"/>
                     <button type="submit" className="btn btn-success">
                         Log in
                     </button>

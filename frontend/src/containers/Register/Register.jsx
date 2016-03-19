@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Field from '../../components/FormField';
+
 export default class Register extends React.Component {
     constructor() {
         super();
@@ -29,33 +31,9 @@ export default class Register extends React.Component {
             <div>
                 <h3>Register form</h3>
                 <form onSubmit={this.onSubmit}>
-                    <div className="input-wrapper">
-                        <label htmlFor="email">Email:</label>
-                        <input
-                            name="email"
-                            type="email"
-                            value={this.state.email}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div className="input-wrapper">
-                        <label htmlFor="password">Password:</label>
-                        <input
-                            name="password"
-                            type="password"
-                            value={this.state.password}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div className="input-wrapper">
-                        <label htmlFor="password">Telephone:</label>
-                        <input
-                            name="telephone"
-                            type="text"
-                            value={this.state.telephone}
-                            onChange={this.handleChange}
-                        />
-                    </div>
+                    <Field name="email" label="Email" binding={this.handleChange} type="email"/>
+                    <Field name="password" label="Password" binding={this.handleChange} type="password"/>
+                    <Field name="telephone" label="Telephone" binding={this.handleChange}/>
                     <button type="submit" className="btn btn-success">
                         Register
                     </button>
