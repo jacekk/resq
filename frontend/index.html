@@ -7,11 +7,38 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <meta charset="utf-8">
     <title>ResQ</title>
+    <style>
+        #loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: #1c2129;
+            color: #FFF;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        }
+        #loading img {
+            display: block;
+            width: 150px;
+            padding-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
 
     <div id="app" class="maxHeight">
-        Loading…
+        <div id="loading">
+            <div>
+            <img src="./svg/resq.svg" alt="Resq">
+            Loading…
+            </div>
+        </div>
     </div>
 
     <script type="text/javascript" src="cordova.js"></script>

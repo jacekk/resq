@@ -10,6 +10,7 @@ const ADDITIONAL_MINUTES = 10;
 const STATUS_SENT_INTERVAL = 60000 * 0.25;
 
 import * as actions from '../../lib/timer/actions';
+import {TYPE_RESQUE, TYPE_OK, START, DEFAULT_MESSAGE_RESQUE} from '../../lib/constants';
 
 import {statusSend, statusUpdate} from '../../lib/status/actions';
 
@@ -39,7 +40,6 @@ export default class Timer extends React.Component {
         clearInterval(this.tid);
     }
 
-
     updateClock() {
         let minutes = this.props.timer.get('minutes');
 
@@ -48,10 +48,10 @@ export default class Timer extends React.Component {
         if (minutes <= 0) {
             this.clearClock();
             this.props.dispatch(actions.timerEnded());
+            this.sendStatusUpdate(TYPE_RESQUE);
+            return;
         } else {
             this.props.dispatch(actions.timerUpdate(minutes));
-            this.sendStatusUpdate();
-            return;
         }
         if (Date.now() - this.lastSentStatusTime >= STATUS_SENT_INTERVAL) {
             this.sendStatusUpdate();
@@ -59,15 +59,19 @@ export default class Timer extends React.Component {
         }
     }
 
-    sendStatusUpdate() {
-        let fullminutes = this.props.timer.get('minutes');
+    sendStatusUpdate(type= TYPE_OK, etap) {
+        let fullminutes= this.props.timer.get('minutes');
         let lat = this.props.status.get('lat');
         let lng = this.props.status.get('lng');
+        let msg = this.props.status.get('message');
+        if (type === TYPE_RESQUE) {
+            msg = DEFAULT_MESSAGE_RESQUE;
+        }
         let expires = [];
         expires.push(pad(Math.floor(fullminutes / 60)));
         expires.push(pad(fullminutes % 60));
         expires.push(pad(0));
-        store.dispatch(statusUpdate(expires.join(':'), lat, lng));
+        store.dispatch(statusSend(msg, expires.join(':'), lat, lng, type, etap));
     }
 
 	toogle() {
@@ -79,7 +83,7 @@ export default class Timer extends React.Component {
                 }
             }, REFRESH_RATE)
             this.props.dispatch(actions.timerStart());
-
+            this.sendStatusUpdate(TYPE_OK, START);
 		} else {
             this.clearClock();
             this.props.dispatch(actions.timerStop());
