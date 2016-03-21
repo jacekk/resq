@@ -53,7 +53,7 @@ class Action extends AbstractDomain {
     public function setExpiresByTime($time)
     {
         $time = explode(':', $time);
-        $interval = 3600 * $time[0] + 60 * $time[1] + $time[2];
+        $interval = 60 * $time[0] + $time[1];
         $this->expires = date('Y-m-d H:i:s', time() + $interval);
     }
 

@@ -14,12 +14,12 @@ class ClassFactory {
 
         if (class_exists($className)) {
             $class = new $className;
-            try {
+          //  try {
                 $class->init($route);
                 $result = $class->$method();
-            } catch (\Exception $e) {
-                $result = $class->apiProblem(500, 'Router', 'Error: ' . $e->getMessage());
-            }
+           // } catch (\Exception $e) {
+           //     $result = $class->apiProblem(500, 'Router', 'Error: ' . $e->getMessage());
+          //  }
         } else {
             throw new \Exception($classType . ' module does not exist!');
         }

@@ -43,6 +43,7 @@ Flight::route('OPTIONS *', function () {
 });
 
 Flight::route('POST /rest/@module/put/*', function ($module, $route) {
+    die('ok');
     $result = ClassFactory::create($module, $route, 'put');
     Flight::json($result);
     die();
@@ -65,6 +66,7 @@ Flight::route('GET /rest/@module/*', function ($module, $route) {
 }, true);
 
 Flight::route('PUT /rest/@module/put*', function ($module, $route) {
+    die('ok');
     $result = ClassFactory::create($module, $route, 'put');
     Flight::json($result);
 }, true);

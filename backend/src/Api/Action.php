@@ -52,7 +52,7 @@ class Action extends ApiAbstract {
         } catch (ApiProblem $e) {
             return $this->apiProblem(self::UNPROCESSABLE_ENTITY, 'ActionPost', $e->getMessage());
         }
-
+        /*
         if ($postData->type == 'rescue') {
             return $this->rescue();
         } else if ($postData->type == 'ok') {
@@ -60,6 +60,7 @@ class Action extends ApiAbstract {
         } else {
             return $this->apiSuccess(200, 'Location & message updated');
         }
+        */
 
 
     }
@@ -120,21 +121,16 @@ class Action extends ApiAbstract {
             $markActions[] = $action['id'];
         }
 
-        // Notify friends
-        $notifier = new ContactNotifier();
-        $notifier->notify($action);
-
         // Mark actions as "need rescue"
         $this->getRepository()->setStatus($markActions, ActionDomain::STATUS_DISABLED);
 
         // Send back message that system will take care of this
         $rescuedUser = $userRepository->fetchEntity($action['user_id']);
-        SMS::instance()->send($rescuedUser->getTelephone(), 'RESQ - Your ICE contact list was notified about your problems! Hope they get there soon!');
+        SMS::instance()->send($rescuedUser->getTelephone(), 'RESQ - We\'re glad that you are safe now! Your alarms has been cancelled!');
 
         $markActions = array();
         foreach($actions as $action) {
             $markActions[] = $action['id'];
-            $notifier->notify($action);
         }
 
         return $this->apiSuccess(200, 'Alarm has been disabled');

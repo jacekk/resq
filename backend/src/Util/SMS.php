@@ -25,6 +25,10 @@ class SMS {
 
     public function send($recipients, $message)
     {
+        if (!count($recipients) || !$recipients) {
+            return;
+        }
+
         $this->smsProvider->messages->sendSms(
             (is_array($recipients) ? $recipients : array($recipients)),
             $message,

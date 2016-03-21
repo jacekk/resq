@@ -15,15 +15,15 @@ class Timer extends AbstractGateway {
         $actionRepository = new ActionRepository(\Flight::db());
         $contactsRepository = new ContactRepository(\Flight::db());
 
-        $actions = $actionRepository->fetch(null,
-            'expires > \'' . date('Y-m-d H:i:s') .'\' AND status = ' . Action::STATUS_ACTIVE
+        $actions = $actionRepository->fetchStmt(null,
+            'expires < \'' . date('Y-m-d H:i:s') .'\' AND status = ' . Action::STATUS_ACTIVE
         );
 
         $notifier = new ContactNotifier();
 
         $markActions = array();
         foreach($actions as $action) {
-            $markActions[] = $action['id'];
+            $markActions[] = (int) $action['id'];
             $notifier->notify($action);
         }
 

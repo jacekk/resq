@@ -11,7 +11,8 @@ class ActionRepository extends AbstractRepository {
     public function setStatus($actions, $status)
     {
         if (count($actions)) {
-            $this->getDb()->query('UPDATE actions SET status = ' . intval($status) . ' WHERE id IN ( ' . implode(',', $actions) . ')');
+            $query = 'UPDATE actions SET status = ' . intval($status) . ' WHERE id IN ( ' . implode(',', $actions) . ')';
+            $this->getDb()->query($query);
         }
     }
 

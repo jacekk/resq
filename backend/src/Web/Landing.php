@@ -12,9 +12,13 @@ class Landing extends \RST\Resq\Api\ApiAbstract {
         $hash = $params['module'];
 
         $actionRepository = new ActionRepository(\Flight::db());
-        $actionRepository->getByHash($hash);
+        $action = $actionRepository->getByHash($hash)->fetch();
 
-        return \Flight::render('rescuelp', array('action' => array('lat' => 24.32, 'lng' => 34.12)));
+        if ($action) {
+            return \Flight::render('rescuelp', array('action' => array('lat' => $action['lat'], 'lng' => $action['lng'])));
+        } else {
+            \Flight::notFound();
+        }
     }
 
 }
