@@ -9,6 +9,9 @@
     "dev": "webpack --watch",
     "dev:cordova:emulator": "npm run build:cordova && cd ../cordova; cordova run --emulator",
     "dev:cordova:device": "npm run build:cordova && cd ../cordova; cordova run --device",
+    "dev:cordova:opera": "npm run build:cordova && cd ../cordova; cordova run browser --target=opera",
+    "dev:cordova:firefox": "npm run build:cordova && cd ../cordova; cordova run browser --target=firefox",
+    "dev:cordova:android": "npm run build:cordova && cd ../cordova; cordova run android --device",
     "dev-server": "webpack-dev-server",
     "test": "mocha './src/**/*.spec.jsx' --compilers js:babel-core/register",
     "test:watch": "npm test -- --watch --watch-extensions jsx,js"

@@ -1,5 +1,2 @@
 .idea/
 npm-debug.log
-
-platforms/android/CordovaLib/build/
-cordova/platforms/android/.gradle/
